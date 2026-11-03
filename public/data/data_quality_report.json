@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-11-04T00:38:02.022405",
+  "total_files_scanned": 18,
+  "total_rows_ingested": 5056,
+  "unique_skus": 5056,
+  "duplicate_skus_count": 0,
+  "missing_price_count": 0,
+  "invalid_currency_count": 0,
+  "unlimited_plans_count": 653,
+  "anomalies_detected": 0,
+  "status": "PASSED_HEALTHY",
+  "duration_seconds": 0.105
+}

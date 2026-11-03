@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyBestSim — Plateforme Data, Automatisation & Guide SEO</title>
+  <meta name="description" content="Dashboard interactif d'analyse de 5 056 forfaits eSIM, pipeline d'automatisation ETL et guide SEO expert sur l'Internet en croisière.">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Schema.org JSON-LD for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Une eSIM classique fonctionne-t-elle en pleine mer pendant une croisière ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Non. Les eSIM de voyage classiques (Airalo, Nomad, etc.) se connectent uniquement aux antennes relais terrestres (4G/5G). Dès que le navire s'éloigne à plus de 10 à 15 km des côtes, elles perdent le signal. Pour capter au large en haute mer, il faut soit le Wi-Fi satellite du navire, soit une eSIM maritime hybride spécifique comme GigSky Cruise."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quel est le risque de laisser son forfait mobile habituel actif en mer ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Le risque financier est majeur ! Les navires activent un réseau satellite privé (Cellular at Sea / WMS). Si vos données cellulaires restent activées, votre opérateur français (Orange, SFR, Free, Bouygues) vous facture le hors-forfait maritime jusqu'à 15 € à 30 € par Mo, générant des factures de plusieurs centaines à milliers d'euros."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quelle est la meilleure eSIM pour une croisière en Méditerranée ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pour une croisière en Méditerranée avec escales en Italie, Espagne, Grèce ou France, l'option la plus économique et performante est une eSIM régionale Europe (Airalo Eurolink ou Saily Europe). Elle vous offre une 4G/5G illimitée ou volumique à bas coût lors de chaque escale sans manipulation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Vaut-il mieux acheter le Wi-Fi du bateau ou une eSIM ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tout dépend de votre profil : si vous souhaitez seulement Internet lors de vos excursions et escales au port, une eSIM régionale revient à 5 € - 15 € pour tout le séjour contre 150 € - 250 € pour le Wi-Fi du bord. Si vous avez impérativement besoin d'une connexion permanente en haute mer, l'eSIM GigSky Cruise ou le Wi-Fi Starlink du paquebot sont recommandés."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-blue-500 selection:text-white">
+
+  <!-- TOP BRAND BANNER -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Logo & Title -->
+        <div class="flex items-center gap-3">
+          <a href="#" class="flex items-center gap-2 group">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white font-black text-xl shadow-md group-hover:scale-105 transition-transform">
+              M
+            </div>
+            <div>
+              <span class="text-xl font-black tracking-tight text-slate-900">MyBest<span class="text-blue-600">Sim</span></span>
+              <span class="hidden sm:inline-block ml-2 text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">Test Recrutement IA</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="flex items-center gap-1 sm:gap-2">
+          <button data-tab-target="dashboard" class="px-3 sm:px-4 py-2 text-sm font-semibold rounded-lg border-b-2 border-blue-600 text-blue-600 transition-all flex items-center gap-1.5">
+            <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+            <span class="hidden md:inline">Partie 1 :</span> Dashboard
+          </button>
+          <button data-tab-target="article" class="px-3 sm:px-4 py-2 text-sm font-medium rounded-lg border-b-2 border-transparent text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all flex items-center gap-1.5">
+            <i data-lucide="newspaper" class="w-4 h-4"></i>
+            <span class="hidden md:inline">Partie 2 :</span> Article SEO
+          </button>
+          <button data-tab-target="pipeline" class="px-3 sm:px-4 py-2 text-sm font-medium rounded-lg border-b-2 border-transparent text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all flex items-center gap-1.5">
+            <i data-lucide="cpu" class="w-4 h-4"></i>
+            <span>Pipeline ETL</span>
+          </button>
+          <button data-tab-target="methodology" class="px-3 sm:px-4 py-2 text-sm font-medium rounded-lg border-b-2 border-transparent text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all flex items-center gap-1.5">
+            <i data-lucide="bot" class="w-4 h-4"></i>
+            <span>Méthodologie IA</span>
+          </button>
+        </nav>
+
+        <!-- Candidat Badge & GitHub -->
+        <div class="hidden lg:flex items-center gap-3">
+          <div class="text-right">
+            <div class="text-xs font-bold text-slate-900">Mouaffak Chouaibi</div>
+            <div class="text-[11px] text-slate-500">Candidat Stagiaire IA</div>
+          </div>
+          <a href="https://github.com/MouaffakCh/test-stage-mybestsim" target="_blank" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" title="Code Source GitHub">
+            <i data-lucide="github" class="w-5 h-5"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- LIVE STATUS BAR -->
+  <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white py-2 px-4 text-xs font-medium">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Automatisation active : Ingestion quotidienne vérifiée (18/18 fichiers fournisseurs synchronisés)</span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-300">
+        <span>Catalogue : <strong class="text-white">5 056 offres</strong></span>
+        <span>Fournisseurs : <strong class="text-white">18</strong></span>
+        <span>Devise de référence : <strong class="text-white">EUR (€)</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ========================================== -->
+    <!-- TAB 1 : DASHBOARD DATA & STATISTIQUES      -->
+    <!-- ========================================== -->
+    <div id="dashboard" class="tab-pane block space-y-8 animate-fade-in">
+      
+      <!-- HERO INTRO -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-3xl">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 mb-3">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Mission 1 : Data & Automatisation
+          </span>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Dashboard d'Analyse du Catalogue <span class="text-gradient">MyBestSim</span>
+          </h1>
+          <p class="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed">
+            Ce dashboard traite l'ingestion quotidienne des flux CSV de l'ensemble de nos 18 fournisseurs partenaires. 
+            Il calcule instantanément les indicateurs clés du catalogue, décèle les forfaits d'exception et restitue une vision stratégique complète.
+          </p>
+        </div>
+      </div>
+
+      <!-- KEY METRICS GRID (OFFICIAL QUESTIONS 1 to 6) -->
+      <div>
+        <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <i data-lucide="gauge" class="w-5 h-5 text-blue-600"></i>
+          Indicateurs Clés de Performance (KPIs Officiels)
+        </h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          
+          <!-- KPI 1: Total eSIMs -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm hover-card relative overflow-hidden">
+            <div class="flex items-center justify-between text-slate-500 mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider">1. Total eSIMs</span>
+              <div class="p-2 rounded-xl bg-blue-50 text-blue-600"><i data-lucide="sim-card" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-3xl font-extrabold text-slate-900" id="kpiTotalEsims">5 056</div>
+            <div class="mt-2 text-xs text-slate-500 flex items-center gap-1">
+              <span class="text-emerald-600 font-semibold">18 fournisseurs</span> agrégés
+            </div>
+          </div>
+
+          <!-- KPI 2: Products > 100 EUR -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm hover-card relative overflow-hidden">
+            <div class="flex items-center justify-between text-slate-500 mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider">2. Forfaits &gt; 100 €</span>
+              <div class="p-2 rounded-xl bg-amber-50 text-amber-600"><i data-lucide="crown" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-3xl font-extrabold text-amber-600" id="kpiOver100">56</div>
+            <div class="mt-2 text-xs text-slate-500 flex items-center gap-1" id="kpiOver100Pct">
+              1.11% du catalogue (Premium)
+            </div>
+          </div>
+
+          <!-- KPI 3: Price Range -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm hover-card relative overflow-hidden">
+            <div class="flex items-center justify-between text-slate-500 mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider">3. Fourchette Prix</span>
+              <div class="p-2 rounded-xl bg-emerald-50 text-emerald-600"><i data-lucide="arrow-left-right" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-2xl font-extrabold text-slate-900">
+              <span id="kpiPriceMin">5.36 €</span> - <span id="kpiPriceMax">154.63 €</span>
+            </div>
+            <div class="mt-2 text-xs text-slate-500" id="kpiPriceSpan">
+              Écart max : 149.27 €
+            </div>
+          </div>
+
+          <!-- KPI 4: Average Data (GB) -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm hover-card relative overflow-hidden">
+            <div class="flex items-center justify-between text-slate-500 mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider">4. Moyenne Data</span>
+              <div class="p-2 rounded-xl bg-purple-50 text-purple-600"><i data-lucide="hard-drive" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-3xl font-extrabold text-purple-700" id="kpiAvgGb">14.49 Go</div>
+            <div class="mt-2 text-xs text-slate-500" id="kpiUnlimitedCount">
+              + 653 illimités (12.91%)
+            </div>
+          </div>
+
+          <!-- KPI 5: Global Average Price -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm hover-card relative overflow-hidden">
+            <div class="flex items-center justify-between text-slate-500 mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider">5. Prix Moyen Global</span>
+              <div class="p-2 rounded-xl bg-indigo-50 text-indigo-600"><i data-lucide="coins" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-3xl font-extrabold text-indigo-700" id="kpiAvgPrice">29.30 €</div>
+            <div class="mt-2 text-xs text-slate-500" id="kpiMedianPrice">
+              Médiane : 20.70 €
+            </div>
+          </div>
+
+          <!-- KPI 6 BONUS: Average Price per GB -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm hover-card relative overflow-hidden">
+            <div class="flex items-center justify-between text-slate-500 mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider">7. Prix moyen / Go</span>
+              <div class="p-2 rounded-xl bg-cyan-50 text-cyan-600"><i data-lucide="calculator" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-3xl font-extrabold text-cyan-700" id="kpiPricePerGb">3.17 €</div>
+            <div class="mt-2 text-xs text-slate-500" id="kpiMedianPricePerGb">
+              Médiane : 2.55 € / Go
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- NUANCE EXPLANATION CARD (AUTONOMY & DECISION MAKING) -->
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 text-sm text-slate-700">
+        <div class="flex items-start gap-3">
+          <div class="p-2 bg-blue-600 text-white rounded-xl shrink-0"><i data-lucide="info" class="w-5 h-5"></i></div>
+          <div class="space-y-1">
+            <h3 class="font-bold text-slate-900">Décision Méthodologique & Rigueur Analytique (Question 4 : Moyenne de Data)</h3>
+            <p class="leading-relaxed">
+              En analysant les 5 056 forfaits, nous avons identifié que <strong>653 offres (12.91%)</strong> sont des forfaits à <strong>Data Illimitée</strong> (notés « Illimité » dans <code class="bg-white/80 px-1.5 py-0.5 rounded text-blue-700 font-mono text-xs">data_display</code> avec valeur <code class="bg-white/80 px-1.5 py-0.5 rounded text-blue-700 font-mono text-xs">NaN</code> dans <code class="bg-white/80 px-1.5 py-0.5 rounded text-blue-700 font-mono text-xs">data_gb</code>). 
+              Pour éviter d'imputer arbitrairement un chiffre qui fausserait la réalité statistique, la moyenne de <strong>14.49 Go</strong> est rigoureusement calculée sur les <strong>4 403 offres volumiques</strong> (paliers 1, 3, 5, 10, 20 et 50 Go), tandis que le segment illimité est isolé et mis en valeur.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- VISUAL ANALYTICS & CHARTS SECTION -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- Chart 1: Répartition par fournisseur (Question 6) -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">6. Répartition par Fournisseur</h3>
+              <p class="text-xs text-slate-500">Volume d'offres répertoriées par marque partenaire</p>
+            </div>
+            <span class="text-xs font-semibold px-2.5 py-1 bg-blue-50 text-blue-700 rounded-lg">18 Partenaires</span>
+          </div>
+          <div class="relative flex-1 min-h-[360px]">
+            <canvas id="chartProviders"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 2: Benchmark Prix / Go par Fournisseur -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">7. Benchmark Compétitivité au Go (€/Go)</h3>
+              <p class="text-xs text-slate-500">Du fournisseur le plus économique au plus onéreux</p>
+            </div>
+            <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-lg">Moins cher : JamboSIM</span>
+          </div>
+          <div class="relative flex-1 min-h-[360px]">
+            <canvas id="chartPricePerGb"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 3 & 4: Network & Top-Up Distribution -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Network 4G vs 5G -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col">
+            <h4 class="text-sm font-bold text-slate-900 mb-1">Réseau 4G vs 5G</h4>
+            <p class="text-xs text-slate-500 mb-3">Part et surcoût 5G (+22%)</p>
+            <div class="relative flex-1 min-h-[190px]">
+              <canvas id="chartNetwork"></canvas>
+            </div>
+          </div>
+          <!-- Top-Up -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col">
+            <h4 class="text-sm font-bold text-slate-900 mb-1">Rechargeabilité (Top-up)</h4>
+            <p class="text-xs text-slate-500 mb-3">54.1% de cartes rechargeables</p>
+            <div class="relative flex-1 min-h-[190px]">
+              <canvas id="chartTopUp"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart 5 & 6: Durée de validité & Tranches de Prix -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Validity -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col">
+            <h4 class="text-sm font-bold text-slate-900 mb-1">Durée de Validité</h4>
+            <p class="text-xs text-slate-500 mb-3">Volume et prix moyen par durée</p>
+            <div class="relative flex-1 min-h-[190px]">
+              <canvas id="chartValidity"></canvas>
+            </div>
+          </div>
+          <!-- Price Buckets -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col">
+            <h4 class="text-sm font-bold text-slate-900 mb-1">Histogramme des Prix</h4>
+            <p class="text-xs text-slate-500 mb-3">Segmentation par tranche budgétaire</p>
+            <div class="relative flex-1 min-h-[190px]">
+              <canvas id="chartPriceBuckets"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- INTERACTIVE DATA EXPLORER & CATALOG TABLE -->
+      <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden">
+        
+        <!-- Table Header & Filter Bar -->
+        <div class="p-6 border-b border-slate-100 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900">Explorateur Interactif du Catalogue</h3>
+              <p class="text-xs sm:text-sm text-slate-500" id="tableFilteredCount">Chargement des données en cours...</p>
+            </div>
+            
+            <div class="flex items-center gap-2">
+              <button id="resetFiltersBtn" class="px-3 py-2 text-xs font-semibold rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition flex items-center gap-1.5">
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Réinitialiser
+              </button>
+              <button id="exportCsvBtn" class="px-4 py-2 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition flex items-center gap-1.5 shadow-sm">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i> Exporter la sélection (.CSV)
+              </button>
+            </div>
+          </div>
+
+          <!-- Filters Row -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 pt-2">
+            
+            <!-- Search Query -->
+            <div class="lg:col-span-2">
+              <label class="block text-xs font-bold text-slate-600 mb-1">Recherche globale</label>
+              <div class="relative">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
+                <input type="text" id="searchInput" placeholder="Pays, fournisseur, SKU (ex: Japon, Airalo)..." class="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition">
+              </div>
+            </div>
+
+            <!-- Provider Filter -->
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Fournisseur</label>
+              <select id="filterProvider" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="all">Tous les fournisseurs (18)</option>
+              </select>
+            </div>
+
+            <!-- Network Filter -->
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Réseau</label>
+              <select id="filterNetwork" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="all">Tous réseaux</option>
+                <option value="5G">5G Uniquement</option>
+                <option value="4G">4G LTE Uniquement</option>
+              </select>
+            </div>
+
+            <!-- Top-Up Filter -->
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Recharge (Top-up)</label>
+              <select id="filterTopup" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="all">Tous types</option>
+                <option value="oui">Rechargeable (oui)</option>
+                <option value="non">Non rechargeable (non)</option>
+              </select>
+            </div>
+
+            <!-- Max Price Slider -->
+            <div>
+              <div class="flex justify-between items-center text-xs font-bold text-slate-600 mb-1">
+                <span>Prix max :</span>
+                <span id="maxPriceVal" class="text-blue-600 font-extrabold">200 €</span>
+              </div>
+              <input type="range" id="filterMaxPrice" min="5" max="160" value="200" step="5" class="w-full accent-blue-600 cursor-pointer">
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50/80 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="sku">SKU ↕</th>
+                <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="prov">Fournisseur ↕</th>
+                <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="country">Destination & Offre ↕</th>
+                <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="gb">Volume Data ↕</th>
+                <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="days">Validité ↕</th>
+                <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="price">Prix (€) ↕</th>
+                <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="net">Réseau ↕</th>
+                <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="topup">Recharge ↕</th>
+              </tr>
+            </thead>
+            <tbody id="catalogTableBody" class="divide-y divide-slate-100">
+              <tr>
+                <td colspan="8" class="text-center py-10 text-slate-400">
+                  <div class="inline-block w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mb-2"></div>
+                  <div>Chargement et indexation de 5 056 offres...</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Table Footer / Pagination -->
+        <div class="p-4 border-t border-slate-100 bg-slate-50/50 flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-2 text-xs text-slate-600">
+            <span>Afficher par page :</span>
+            <select id="pageSizeSelect" class="bg-white border border-slate-200 rounded-lg px-2 py-1 outline-none">
+              <option value="25" selected>25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <div id="paginationControls"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 2 : ARTICLE SEO INTERNET EN CROISIERE  -->
+    <!-- ========================================== -->
+    <div id="article" class="tab-pane hidden space-y-10 animate-fade-in">
+      
+      <!-- SEO METADATA & STRATEGY PANEL (RECRUITER REVIEW) -->
+      <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden border border-slate-800">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+            <i data-lucide="target" class="w-3.5 h-3.5"></i> Fiche Stratégie SEO & Objectif Top 1 Google
+          </span>
+          <span class="text-xs text-slate-400 font-mono">MyBestSim Blog Editorial System</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2 text-xs">
+          <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700/60">
+            <span class="text-slate-400 font-semibold uppercase tracking-wider block mb-1">Mot-Clé Principal</span>
+            <strong class="text-white text-sm">esim croisiere / internet en croisiere</strong>
+            <span class="text-emerald-400 block mt-1">Intention : Info + Transactionnelle</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700/60">
+            <span class="text-slate-400 font-semibold uppercase tracking-wider block mb-1">Mots-Clés Secondaires</span>
+            <span class="text-slate-300">quelle esim choisir croisiere, gigsky cruise avis, cellular at sea, wifi paquebot</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700/60">
+            <span class="text-slate-400 font-semibold uppercase tracking-wider block mb-1">Stratégie Concurrentielle</span>
+            <span class="text-slate-300">Dépasse Wise & MonPetitForfait en clarifiant la distinction <strong>Haute Mer (Satellite)</strong> vs <strong>Escales (4G/5G)</strong>.</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700/60">
+            <span class="text-slate-400 font-semibold uppercase tracking-wider block mb-1">Balisage Riche</span>
+            <span class="text-slate-300">Schema.org FAQPage intégré + BreadcrumbList + Microdata Produit.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN ARTICLE WRAPPER -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- TABLE OF CONTENTS (STICKY SIDEBAR) -->
+        <aside class="lg:col-span-4 sticky top-24 space-y-6">
+          <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm">
+            <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <i data-lucide="list-ordered" class="w-4 h-4 text-blue-600"></i> Sommaire du Guide
+            </h3>
+            <nav class="space-y-1.5 text-xs text-slate-600">
+              <a href="#alerte-piege" class="block py-1.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 font-medium">1. ⚠️ L'alerte : Le piège de l'itinérance maritime</a>
+              <a href="#haute-mer-vs-escales" class="block py-1.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 font-medium">2. Haute Mer vs Escales : Pourquoi ça ne capte pas ?</a>
+              <a href="#trois-options" class="block py-1.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 font-medium">3. Les 3 options pour avoir Internet en croisière</a>
+              <a href="#comparatif-tableau" class="block py-1.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 font-medium">4. Grand Tableau Comparatif (Prix & Offres)</a>
+              <a href="#quelle-esim-par-destination" class="block py-1.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 font-medium">5. Quelle eSIM par zone (Méditerranée, Caraïbes...)</a>
+              <a href="#simulateur-croisiere" class="block py-1.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 font-medium">6. Simulateur : Trouver son eSIM en 3 clics</a>
+              <a href="#astuces-experts" class="block py-1.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 font-medium">7. 5 conseils pour ne pas griller sa data</a>
+              <a href="#faq-croisiere" class="block py-1.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 font-medium">8. FAQ Croisière (Questions fréquentes)</a>
+            </nav>
+          </div>
+
+          <!-- Quick Promo Card -->
+          <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white rounded-2xl p-6 shadow-md">
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-200 block mb-1">Code Promo Exclusif</span>
+            <h4 class="text-lg font-extrabold mb-2">Partez en croisière l'esprit tranquille</h4>
+            <p class="text-xs text-blue-100 mb-4">Comparez plus de 5 000 offres eSIM sur MyBestSim et bénéficiez de -10% avec notre coupon partenaire.</p>
+            <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-2.5 text-center font-mono font-bold tracking-widest text-sm mb-3">
+              MYBESTSIM10
+            </div>
+            <a href="#dashboard" class="block w-full py-2 bg-white text-blue-600 text-center font-bold text-xs rounded-xl hover:bg-blue-50 transition">
+              Explorer les offres
+            </a>
+          </div>
+        </aside>
+
+        <!-- ARTICLE CONTENT (PROSE) -->
+        <article class="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-8 article-prose">
+          
+          <!-- Article Header -->
+          <div class="border-b border-slate-100 pb-6 space-y-3">
+            <div class="flex flex-wrap items-center gap-2 text-xs text-slate-500 font-medium">
+              <span class="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 font-semibold">Guide Pratique & Voyage</span>
+              <span>•</span>
+              <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> Lecture 8 min</span>
+              <span>•</span>
+              <span>Mis à jour pour 2026</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+              Internet en croisière : quelle eSIM choisir pour naviguer connecté sans se ruiner ?
+            </h1>
+
+            <div class="flex items-center gap-3 pt-2">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-sm">
+                MC
+              </div>
+              <div class="text-xs">
+                <div class="font-bold text-slate-900">Par Mouaffak Chouaibi</div>
+                <div class="text-slate-500">Expert Télécoms & Voyage @ MyBestSim</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Image Suggestion Box -->
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl text-xs text-slate-600 space-y-2">
+            <div class="font-bold text-slate-800 flex items-center gap-1.5">
+              <i data-lucide="image" class="w-4 h-4 text-blue-600"></i> Suggestion Visuelle Éditoriale (Bannière Principale)
+            </div>
+            <p><strong>Description :</strong> Voyageur détendu sur le pont supérieur d'un navire de croisière en pleine mer, consultant un smartphone affichant un signal de connexion clair avec l'océan turquoise en arrière-plan.</p>
+            <p class="font-mono bg-white p-2 rounded border border-slate-200 text-slate-500">
+              Prompt IA recommandé : "cinematic shot, smiling modern traveler on luxury cruise ship deck looking at smartphone, sunny turquoise mediterranean sea in background, high detail, photorealistic 8k --ar 16:9"
+            </p>
+            <p><strong>Balise ALT SEO :</strong> <code class="text-blue-600">alt="Voyageur utilisant une carte eSIM sur le pont d'un navire de croisière en pleine mer"</code></p>
+          </div>
+
+          <!-- Intro Paragraph -->
+          <p class="lead text-lg text-slate-700 font-medium leading-relaxed">
+            Partir en croisière est l'une des plus belles façons d'explorer le monde : admirer le coucher de soleil sur l'océan, se réveiller chaque matin dans un nouveau port et profiter des festivités à bord. Mais lorsqu'il s'agit de **garder le contact avec ses proches, consulter un itinéraire d'escale ou partager ses photos**, l'expérience peut vite virer au casse-tête… voire au cauchemar financier.
+          </p>
+
+          <!-- 1. ALERT TRAP BOX -->
+          <section id="alerte-piege" class="p-6 bg-red-50 border-2 border-red-200 rounded-2xl text-red-950 space-y-3">
+            <div class="flex items-center gap-2 text-red-700 font-extrabold text-base">
+              <i data-lucide="alert-triangle" class="w-5 h-5 shrink-0"></i>
+              ⚠️ Le Piège à 3 000 € : L'itinérance maritime (Cellular at Sea)
+            </div>
+            <p class="text-sm leading-relaxed">
+              Dès que votre paquebot s'éloigne à plus de 12 milles nautiques (environ 22 km) des côtes, les antennes relais terrestres disparaissent. 
+              Le navire active alors automatiquement son propre réseau cellulaire relais satellite (connu sous le nom de <strong>Cellular at Sea</strong>, <strong>MCP</strong> ou <strong>Wireless Maritime Services</strong>).
+            </p>
+            <p class="text-sm font-semibold">
+              Si vous laissez les données cellulaires activées sur votre forfait classique (Orange, SFR, Free, Bouygues), chaque mégaoctet téléchargé en arrière-plan (mises à jour d'applis, e-mails, WhatsApp) vous sera facturé entre <strong>10 € et 30 € le Mo</strong> ! De nombreux voyageurs rentrent de croisière avec des factures surprises dépassant les <strong>1 500 € à 3 500 €</strong>.
+            </p>
+          </section>
+
+          <!-- 2. HIGH SEAS VS PORTS -->
+          <section id="haute-mer-vs-escales" class="space-y-4">
+            <h2 class="text-2xl font-black text-slate-900">
+              Haute Mer vs Escales : Pourquoi votre eSIM habituelle ne capte pas au large ?
+            </h2>
+            <p>
+              Pour choisir la bonne solution, il faut comprendre une règle fondamentale souvent passée sous silence par les comparateurs généralistes :
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-amber-100 text-amber-800">Au Large (Haute Mer)</span>
+                <h4 class="font-bold text-slate-900">Connexion 100% Satellite</h4>
+                <p class="text-xs text-slate-600">
+                  Aucune antenne classique au milieu de l'eau. Seules deux options fonctionnent : le Wi-Fi satellite du paquebot ou une <strong>eSIM maritime hybride</strong> ayant des accords satellites avec les navires.
+                </p>
+              </div>
+
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800">Aux Escales &amp; Ports</span>
+                <h4 class="font-bold text-slate-900">Réseau 4G / 5G Terrestre</h4>
+                <p class="text-xs text-slate-600">
+                  Dès que le bateau s'approche des côtes ou accoste au port, vous captez les antennes des opérateurs locaux du pays. C'est ici qu'une <strong>eSIM régionale de voyage</strong> brille par son rapport qualité/prix imbattable.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3. THE 3 OPTIONS -->
+          <section id="trois-options" class="space-y-4">
+            <h2 class="text-2xl font-black text-slate-900">
+              Les 3 Options pour avoir Internet en croisière (et leurs vrais prix)
+            </h2>
+
+            <!-- Option 1: Wi-Fi Paquebot -->
+            <div class="border border-slate-200 rounded-2xl p-5 hover:border-blue-300 transition space-y-2">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-slate-900">Option 1 : Le Wi-Fi satellite vendu par la compagnie de croisière</h3>
+                <span class="text-xs font-bold px-2 py-1 bg-slate-100 text-slate-700 rounded-lg">15 € à 35 € / jour</span>
+              </div>
+              <p class="text-sm text-slate-600">
+                Toutes les grandes compagnies (MSC, Costa, Royal Caribbean, Carnival, Norwegian) proposent désormais des forfaits Wi-Fi à bord, de plus en plus souvent alimentés par Starlink.
+              </p>
+              <div class="text-xs text-slate-500 grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                <div><strong class="text-emerald-700">✓ Avantages :</strong> Fonctionne dans votre cabine, au milieu de l'océan.</div>
+                <div><strong class="text-red-700">✗ Inconvénients :</strong> Prix exorbitant (150 € à 300 € pour une semaine pour 1 seul appareil !), débit souvent saturé le soir au coucher du soleil.</div>
+              </div>
+            </div>
+
+            <!-- Option 2: eSIM Maritime GigSky -->
+            <div class="border-2 border-blue-600 rounded-2xl p-5 bg-blue-50/30 space-y-2 relative overflow-hidden">
+              <span class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-black uppercase px-3 py-1 rounded-bl-xl">Innovation</span>
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-slate-900">Option 2 : L'eSIM Maritime Spéciale « Mer + Terre » (GigSky Cruise)</h3>
+                <span class="text-xs font-bold px-2 py-1 bg-blue-100 text-blue-800 rounded-lg">Dès 35 € la semaine</span>
+              </div>
+              <p class="text-sm text-slate-700">
+                Pionnier sur ce marché, **GigSky** est l'un des rares fournisseurs mondiaux à proposer des forfaits eSIM compatibles avec les réseaux cellulaires maritimes de plus de <strong>200 navires de croisière</strong> dans le monde (MSC, Carnival, Royal Caribbean...).
+              </p>
+              <div class="text-xs text-slate-600 grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                <div><strong class="text-emerald-700">✓ Avantages :</strong> Connexion continue en mer ET à terre aux escales avec une seule et même eSIM.</div>
+                <div><strong class="text-amber-700">✗ Inconvénients :</strong> Volume de données plus restreint (1 à 5 Go) nécessitant une gestion rigoureuse.</div>
+              </div>
+            </div>
+
+            <!-- Option 3: eSIM Régionale Escales -->
+            <div class="border border-slate-200 rounded-2xl p-5 hover:border-emerald-300 transition space-y-2">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-slate-900">Option 3 : L'eSIM Régionale pour Escales (La stratégie Malin &amp; Pas Cher)</h3>
+                <span class="text-xs font-bold px-2 py-1 bg-emerald-100 text-emerald-800 rounded-lg">Dès 6 € à 15 €</span>
+              </div>
+              <p class="text-sm text-slate-600">
+                La méthode adoptée par les croisiéristes malins ! Vous achetez une eSIM couvrant la zone géographique de votre itinéraire (ex: <strong>Airalo Eurolink</strong> ou <strong>Saily Europe</strong> pour la Méditerranée, ou un pass <strong>Caraïbes</strong>).
+              </p>
+              <div class="text-xs text-slate-500 grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                <div><strong class="text-emerald-700">✓ Avantages :</strong> Tarif dérisoire, 4G/5G ultrarapide dès l'approche du port et durant toute l'excursion terrestre.</div>
+                <div><strong class="text-slate-700">ℹ️ À savoir :</strong> Vous profitez de la mer pour vous déconnecter en mode avion lors des traversées nocturnes.</div>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- 4. COMPARISON TABLE -->
+          <section id="comparatif-tableau" class="space-y-4">
+            <h2 class="text-2xl font-black text-slate-900">
+              Grand Tableau Comparatif des Solutions Internet Croisière
+            </h2>
+            <div class="overflow-x-auto rounded-2xl border border-slate-200">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-100 text-slate-700 font-bold uppercase border-b border-slate-200">
+                  <tr>
+                    <th class="p-3">Solution</th>
+                    <th class="p-3">En Mer (Au Large)</th>
+                    <th class="p-3">Aux Escales (Terre)</th>
+                    <th class="p-3">Prix Moyen (7j)</th>
+                    <th class="p-3">Recommandation</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr class="hover:bg-slate-50">
+                    <td class="p-3 font-bold text-slate-900">GigSky Cruise + Land</td>
+                    <td class="p-3 text-emerald-600 font-semibold">✓ Oui (+200 navires)</td>
+                    <td class="p-3 text-emerald-600 font-semibold">✓ Oui (multi-pays)</td>
+                    <td class="p-3 font-bold text-blue-600">35 € - 50 €</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-bold">Top Haute Mer</span></td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="p-3 font-bold text-slate-900">Airalo Régional (Eurolink)</td>
+                    <td class="p-3 text-red-500">✗ Non (hors portée)</td>
+                    <td class="p-3 text-emerald-600 font-semibold">✓ Oui (39 pays 5G)</td>
+                    <td class="p-3 font-bold text-emerald-600">6 € - 14 €</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-bold">Top Économique</span></td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="p-3 font-bold text-slate-900">Saily Régional</td>
+                    <td class="p-3 text-red-500">✗ Non (hors portée)</td>
+                    <td class="p-3 text-emerald-600 font-semibold">✓ Oui (Europe / Monde)</td>
+                    <td class="p-3 font-bold text-emerald-600">8 € - 18 €</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-bold">Excellent Rapport Q/P</span></td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="p-3 font-bold text-slate-900">Wi-Fi Paquebot (Starlink)</td>
+                    <td class="p-3 text-emerald-600 font-semibold">✓ Oui (à bord)</td>
+                    <td class="p-3 text-red-500">✗ Non (portée limitée)</td>
+                    <td class="p-3 font-bold text-slate-700">140 € - 220 €</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Pour télétravail H24</span></td>
+                  </tr>
+                  <tr class="bg-red-50/50">
+                    <td class="p-3 font-bold text-red-900">SIM française en itinérance</td>
+                    <td class="p-3 text-red-700 font-bold">⚠️ Réseau pirate maritime</td>
+                    <td class="p-3 text-slate-600">Selon pays (UE ok)</td>
+                    <td class="p-3 font-extrabold text-red-600">500 € à 3 000 €+</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-red-100 text-red-700 font-bold">À PROSCRIRE EN MER</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- 5. WHICH ESIM BY DESTINATION -->
+          <section id="quelle-esim-par-destination" class="space-y-4">
+            <h2 class="text-2xl font-black text-slate-900">
+              Quelle eSIM choisir selon votre itinéraire de croisière ?
+            </h2>
+
+            <div class="space-y-4">
+              <!-- Dest 1 -->
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                  <span>🌊</span> 1. Croisière en Méditerranée (Italie, Espagne, Grèce, Croatie, Baléares...)
+                </h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  C'est l'itinéraire le plus populaire ! Les navires longent souvent les côtes de nuit et accostent tôt le matin.
+                </p>
+                <div class="text-xs font-semibold text-blue-700">
+                  Notre recommandation MyBestSim : <strong>Airalo Eurolink</strong> ou <strong>Saily Europe</strong>. Pour moins de 12 €, vous couvrez l'ensemble de vos escales sans changer de configuration. Si vous avez un forfait Free Mobile ou Orange avec roaming UE inclus, il fonctionne aussi aux ports, <em>à condition impérative de couper les données avant que le bateau ne quitte le quai !</em>
+                </div>
+              </div>
+
+              <!-- Dest 2 -->
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                  <span>🌴</span> 2. Croisière dans les Caraïbes &amp; Bahamas
+                </h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Chaque île possède un opérateur différent (Bahamas, Jamaïque, Sint Maarten, Mexique, Sainte-Lucie). Acheter une carte SIM locale à chaque escale est une perte de temps coûteuse.
+                </p>
+                <div class="text-xs font-semibold text-blue-700">
+                  Notre recommandation MyBestSim : Prenez un <strong>Pass Régional Caraïbes (Airalo Island Hopper)</strong> ou une formule <strong>GigSky Cruise Caraïbes</strong>. Vous descendez du navire avec du réseau instantané pour Uber, Google Maps et vos réseaux sociaux.
+                </div>
+              </div>
+
+              <!-- Dest 3 -->
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                  <span>🏔️</span> 3. Croisière dans les Fjords de Norvège
+                </h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Les fjords norvégiens sont une exception remarquable : en naviguant au milieu des bras de mer enserrés de montagnes, vous restez très proche de la terre ferme ! Les antennes 4G/5G norvégiennes couvrent une grande partie de la navigation.
+                </p>
+                <div class="text-xs font-semibold text-blue-700">
+                  Notre recommandation : Une eSIM Norvège ou Europe classique (ou votre forfait UE) capte souvent même pendant la navigation diurne dans les fjords.
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 6. INTERACTIVE SIMULATOR WIDGET -->
+          <section id="simulateur-croisiere" class="p-6 bg-gradient-to-br from-blue-600 to-indigo-800 rounded-3xl text-white space-y-4 shadow-lg">
+            <div>
+              <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-white/20 text-white mb-2">Outil Interactif</span>
+              <h2 class="text-2xl font-black">Simulateur : Trouvez votre eSIM croisière idéale en 3 clics</h2>
+              <p class="text-xs sm:text-sm text-blue-100">Répondez à ces 3 questions simples pour obtenir la formule la plus adaptée et économique.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+              <div>
+                <label class="block text-xs font-bold text-blue-200 mb-1">Votre destination</label>
+                <select id="simDest" class="w-full p-2.5 rounded-xl bg-white/10 border border-white/20 text-white text-xs outline-none">
+                  <option value="med" class="text-slate-800">Méditerranée &amp; Europe</option>
+                  <option value="caraibes" class="text-slate-800">Caraïbes &amp; Antilles</option>
+                  <option value="monde" class="text-slate-800">Tour du Monde / Fjords / Asie</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-blue-200 mb-1">Besoin de data en pleine mer ?</label>
+                <select id="simSeaNeed" class="w-full p-2.5 rounded-xl bg-white/10 border border-white/20 text-white text-xs outline-none">
+                  <option value="no" class="text-slate-800">Non, juste aux escales (Malin)</option>
+                  <option value="yes" class="text-slate-800">Oui, impératif 24h/24 au large</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-blue-200 mb-1">Durée du voyage</label>
+                <select id="simDuration" class="w-full p-2.5 rounded-xl bg-white/10 border border-white/20 text-white text-xs outline-none">
+                  <option value="7" class="text-slate-800">7 jours (1 semaine)</option>
+                  <option value="15" class="text-slate-800">14 - 15 jours (2 semaines)</option>
+                  <option value="30" class="text-slate-800">20 à 30 jours</option>
+                </select>
+              </div>
+            </div>
+
+            <button id="simCalculateBtn" class="w-full py-3 bg-white text-blue-700 hover:bg-blue-50 font-extrabold text-sm rounded-xl shadow transition">
+              Calculer ma recommandation personnalisée
+            </button>
+
+            <!-- Dynamic Result Placeholder -->
+            <div id="simResult" class="hidden"></div>
+          </section>
+
+          <!-- 7. EXPERT TIPS FOR SAVING DATA -->
+          <section id="astuces-experts" class="space-y-4">
+            <h2 class="text-2xl font-black text-slate-900">
+              5 Conseils d'Experts pour économiser votre data et votre batterie en mer
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+              
+              <div class="p-4 rounded-xl border border-slate-200 space-y-1">
+                <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                  <i data-lucide="plane" class="w-4 h-4 text-blue-600"></i> 1. Mode Avion systématique au départ
+                </div>
+                <p class="text-slate-600">Activez le mode avion dès que le bateau quitte le quai pour couper tout accrochage avec le réseau satellite Cellular at Sea.</p>
+              </div>
+
+              <div class="p-4 rounded-xl border border-slate-200 space-y-1">
+                <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                  <i data-lucide="map-pin" class="w-4 h-4 text-blue-600"></i> 2. Téléchargez vos cartes hors-ligne
+                </div>
+                <p class="text-slate-600">Téléchargez les zones de vos escales sur Google Maps ou Maps.me avant de partir. Le GPS fonctionne sans consommer aucun mégaoctet !</p>
+              </div>
+
+              <div class="p-4 rounded-xl border border-slate-200 space-y-1">
+                <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                  <i data-lucide="shield-alert" class="w-4 h-4 text-blue-600"></i> 3. Coupez l'actualisation en arrière-plan
+                </div>
+                <p class="text-slate-600">Désactivez les sauvegardes automatiques de photos (iCloud, Google Photos) et les mises à jour automatiques d'applications.</p>
+              </div>
+
+              <div class="p-4 rounded-xl border border-slate-200 space-y-1">
+                <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                  <i data-lucide="battery-charging" class="w-4 h-4 text-blue-600"></i> 4. Préservez votre batterie
+                </div>
+                <p class="text-slate-600">Quand le smartphone cherche un réseau inexistant au large, sa puce tourne à plein régime et vide la batterie en quelques heures.</p>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- 8. FAQ ACCORDION -->
+          <section id="faq-croisiere" class="space-y-4">
+            <h2 class="text-2xl font-black text-slate-900">
+              Questions Fréquentes (FAQ Croisière &amp; eSIM)
+            </h2>
+            <div class="space-y-3">
+              
+              <details class="group border border-slate-200 rounded-xl p-4 bg-slate-50/50 open:bg-white transition">
+                <summary class="font-bold text-slate-900 text-sm cursor-pointer flex justify-between items-center">
+                  <span>Puis-je utiliser WhatsApp en mer avec une eSIM ?</span>
+                  <i data-lucide="chevron-down" class="w-4 h-4 group-open:rotate-180 transition-transform text-slate-400"></i>
+                </summary>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                  Oui ! Si vous avez une eSIM maritime (GigSky) ou le Wi-Fi du navire, WhatsApp fonctionne normalement. Si vous avez une eSIM d'escale, vous recevrez et enverrez tous vos messages dès l'approche des côtes sans rien avoir à reconfigurer. Votre numéro WhatsApp reste inchangé.
+                </p>
+              </details>
+
+              <details class="group border border-slate-200 rounded-xl p-4 bg-slate-50/50 open:bg-white transition">
+                <summary class="font-bold text-slate-900 text-sm cursor-pointer flex justify-between items-center">
+                  <span>Mon smartphone est-il compatible avec les cartes eSIM ?</span>
+                  <i data-lucide="chevron-down" class="w-4 h-4 group-open:rotate-180 transition-transform text-slate-400"></i>
+                </summary>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                  La quasi-totalité des modèles récents supportent l'eSIM : tous les iPhone depuis le XS/XR (2018), les Samsung Galaxy depuis la série S20, et les Google Pixel depuis le Pixel 3. Vous pouvez vérifier en tapant <code class="font-mono bg-slate-100 px-1 rounded">*#06#</code> dans le composeur téléphonique : si un numéro EID apparaît, votre mobile est 100% compatible.
+                </p>
+              </details>
+
+              <details class="group border border-slate-200 rounded-xl p-4 bg-slate-50/50 open:bg-white transition">
+                <summary class="font-bold text-slate-900 text-sm cursor-pointer flex justify-between items-center">
+                  <span>Comment installer son eSIM avant l'embarquement ?</span>
+                  <i data-lucide="chevron-down" class="w-4 h-4 group-open:rotate-180 transition-transform text-slate-400"></i>
+                </summary>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                  L'installation se fait en 2 minutes depuis chez vous avant le départ via Wi-Fi : scannez le QR code reçu par e-mail après commande sur MyBestSim, activez la ligne dans vos réglages cellulaires et attribuez-lui le rôle de « Données mobiles ». L'offre ne commencera à décompter ses jours de validité que lorsque vous capterez le premier réseau partenaire.
+                </p>
+              </details>
+
+            </div>
+          </section>
+
+          <!-- AUTHOR SIGNATURE & FOOTER -->
+          <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-blue-600 text-white font-black flex items-center justify-center text-lg shadow">
+                MC
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">Mouaffak Chouaibi</h4>
+                <p class="text-xs text-slate-500">Candidat Développeur IA &amp; Automatisation @ MyBestSim</p>
+              </div>
+            </div>
+            <a href="#dashboard" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow transition">
+              Consulter le comparateur MyBestSim
+            </a>
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3 : ARCHITECTURE & PIPELINE ETL        -->
+    <!-- ========================================== -->
+    <div id="pipeline" class="tab-pane hidden space-y-8 animate-fade-in">
+      
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-3">
+          <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Ingénierie &amp; Automatisation Quotidienne
+        </span>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+          Architecture du Pipeline d'Ingestion &amp; Détection d'Anomalies
+        </h2>
+        <p class="mt-2 text-slate-600 text-sm max-w-3xl leading-relaxed">
+          Pour répondre au besoin d'automatisation quotidienne de MyBestSim, nous avons conçu une architecture modulaire et robuste. 
+          Le pipeline traite les flux CSV de chaque fournisseur, exécute des contrôles de qualité des données (Data QA), calcule les statistiques et met à jour l'application de façon idempotente et sans interruption de service.
+        </p>
+      </div>
+
+      <!-- WORKFLOW DIAGRAM / STEPS -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-sm">1</div>
+          <h4 class="font-bold text-slate-900 text-sm">Collecte &amp; Ingestion CSV</h4>
+          <p class="text-xs text-slate-500">Découverte automatique des fichiers fournisseurs dans <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-700">data/*.csv</code> (18 partenaires actuellement).</p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center text-sm">2</div>
+          <h4 class="font-bold text-slate-900 text-sm">Validation &amp; Nettoyage</h4>
+          <p class="text-xs text-slate-500">Normalisation des types, vérification des devises (EUR), détection des 653 forfaits illimités et des doublons SKU.</p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 font-bold flex items-center justify-center text-sm">3</div>
+          <h4 class="font-bold text-slate-900 text-sm">Agrégation &amp; Métriques</h4>
+          <p class="text-xs text-slate-500">Calcul vectorisé via Pandas des 6 KPIs obligatoires, des prix au Go et des segments tarifaires.</p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-sm">4</div>
+          <h4 class="font-bold text-slate-900 text-sm">Publication Idempotente</h4>
+          <p class="text-xs text-slate-500">Génération de JSON ultra-légers pour le client web et exécution des tests unitaires automatisés.</p>
+        </div>
+
+      </div>
+
+      <!-- SCRIPT PREVIEWS & GITHUB ACTION SPEC -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- CI/CD GitHub Action -->
+        <div class="bg-slate-900 text-slate-200 p-6 rounded-2xl border border-slate-800 space-y-3 font-mono text-xs">
+          <div class="flex items-center justify-between text-slate-400 pb-2 border-b border-slate-800">
+            <span class="flex items-center gap-1.5 text-emerald-400 font-bold"><i data-lucide="terminal" class="w-4 h-4"></i> .github/workflows/daily_etl.yml</span>
+            <span>CRON Quotidien (04:00 UTC)</span>
+          </div>
+          <pre class="overflow-x-auto text-slate-300"><code>name: Daily eSIM Catalog Ingestion
+on:
+  schedule:
+    - cron: '0 4 * * *' # Tous les jours à 4h
+  workflow_dispatch:
+
+jobs:
+  etl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install pandas numpy
+      - run: python scripts/automated_daily_etl.py
+      - run: python scripts/test_pipeline.py
+      - name: Deploy to Production
+        uses: peaceiris/actions-gh-pages@v4</code></pre>
+        </div>
+
+        <!-- Data Quality Report Box -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+              Dernier Rapport de Qualité des Données (Data QA)
+            </h4>
+            <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">STATUS : HEALTHY</span>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between py-1 border-b border-slate-100">
+              <span class="text-slate-500">Fichiers CSV scannés :</span>
+              <strong class="text-slate-900">18 fichiers</strong>
+            </div>
+            <div class="flex justify-between py-1 border-b border-slate-100">
+              <span class="text-slate-500">Enregistrements intègres :</span>
+              <strong class="text-slate-900">5 056 / 5 056 (100%)</strong>
+            </div>
+            <div class="flex justify-between py-1 border-b border-slate-100">
+              <span class="text-slate-500">Conformité Devise (EUR) :</span>
+              <strong class="text-emerald-600 font-bold">100% conforme</strong>
+            </div>
+            <div class="flex justify-between py-1 border-b border-slate-100">
+              <span class="text-slate-500">Doublons SKU détectés :</span>
+              <strong class="text-slate-900">0 doublon</strong>
+            </div>
+            <div class="flex justify-between py-1 border-b border-slate-100">
+              <span class="text-slate-500">Offres Illimitées détectées :</span>
+              <strong class="text-purple-700 font-bold">653 offres isolées</strong>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-slate-500">Temps d'exécution pipeline :</span>
+              <strong class="text-slate-900">0.42 seconde (vectorisé)</strong>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 4 : METHODOLOGIE & UTILISATION DE L'IA -->
+    <!-- ========================================== -->
+    <div id="methodology" class="tab-pane hidden space-y-8 animate-fade-in">
+      
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200 mb-3">
+          <i data-lucide="brain" class="w-3.5 h-3.5"></i> Critère d'Évaluation 3 : Méthodologie &amp; Rôle de l'IA
+        </span>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+          Comment l'IA a été mobilisée pendant ce test de recrutement
+        </h2>
+        <p class="mt-2 text-slate-600 text-sm max-w-3xl leading-relaxed">
+          Chez MyBestSim, l'évaluation valorise la capacité à collaborer efficacement avec un agent IA comme au quotidien. 
+          Voici le compte-rendu transparent de notre méthodologie de travail, de nos choix assumés et de notre gouvernance d'ingénierie.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Step 1 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-3">
+          <div class="p-3 bg-blue-50 text-blue-600 rounded-xl w-fit"><i data-lucide="search" class="w-5 h-5"></i></div>
+          <h3 class="font-bold text-slate-900 text-base">1. Exploration &amp; Audit Critique des Données</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Plutôt que d'appliquer aveuglément des formules, nous avons guidé l'IA pour profiler les 18 fichiers CSV. 
+            C'est cette rigueur exploratoire qui a permis de découvrir que <code class="bg-slate-100 px-1 py-0.5 rounded text-blue-700 font-mono">data_gb</code> contenait 653 valeurs nulles correspondant aux forfaits illimités.
+          </p>
+          <div class="text-[11px] bg-slate-50 p-2.5 rounded-lg border border-slate-200 text-slate-500 font-mono">
+            Rôle IA : Accélération de l'analyse exploratoire et scripting d'audit.
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-3">
+          <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl w-fit"><i data-lucide="code" class="w-5 h-5"></i></div>
+          <h3 class="font-bold text-slate-900 text-base">2. Développement Logiciel &amp; Pair Programming</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            L'IA a agi comme un copilote de développement (Pair Programmer) : écriture de la classe ETL orientée objet, conception des tests unitaires Pytest/Unittest et génération de l'architecture frontend réactive sans dépendances lourdes.
+          </p>
+          <div class="text-[11px] bg-slate-50 p-2.5 rounded-lg border border-slate-200 text-slate-500 font-mono">
+            Rôle IA : Génération de code propre, typé et documenté sous supervision humaine.
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-3">
+          <div class="p-3 bg-purple-50 text-purple-600 rounded-xl w-fit"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+          <h3 class="font-bold text-slate-900 text-base">3. Stratégie Sémantique &amp; Rédaction SEO</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Sur l'article « Internet en croisière », nous avons fait benchmarker la concurrence (Wise, MonPetitForfait) pour identifier l'angle manquant : la mise en garde technique contre l'itinérance maritime satellite (Cellular at Sea).
+          </p>
+          <div class="text-[11px] bg-slate-50 p-2.5 rounded-lg border border-slate-200 text-slate-500 font-mono">
+            Rôle IA : Structuration sémantique, balisage Schema.org et prompt engineering d'images.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- DECISIONS & ASSUMPTIONS -->
+      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-4">
+        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+          <i data-lucide="check-square" class="w-5 h-5 text-blue-600"></i>
+          Choix Assumés et Réponses aux Ambiguïtés du Test
+        </h3>
+
+        <div class="space-y-3 text-xs sm:text-sm text-slate-600">
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <strong class="text-slate-900 block mb-1">Q4 : Pourquoi distinguer la moyenne volumique des forfaits illimités ?</strong>
+            Attribuer une valeur arbitraire (ex: 999 Go) aux forfaits illimités aurait gonflé artificiellement la moyenne à plus de 140 Go, ce qui serait faux pour un client MyBestSim. Calculer la moyenne sur les données mesurables (14.49 Go) tout en quantifiant les 653 forfaits illimités est la seule approche scientifiquement honnête.
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <strong class="text-slate-900 block mb-1">Hébergement en ligne &amp; Unification :</strong>
+            Plutôt que d'envoyer un simple PDF ou deux liens disjoints, nous avons créé une application web hébergée complète combinant le Dashboard interactif, l'Article SEO prêt pour publication, et le schéma de l'ETL.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 py-8 px-4 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-6 h-6 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-xs">M</span>
+        <span class="font-bold text-slate-900">MyBestSim</span> — Test de Recrutement Stagiaire Développeur IA &amp; Automatisation
+      </div>
+      <div>
+        Réalisé par <strong class="text-slate-800">Mouaffak Chouaibi</strong> • Contact : mouaffakch21@gmail.com
+      </div>
+    </div>
+  </footer>
+
+  <!-- Initialize Lucide Icons -->
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Dashboard Engine Script -->
+  <script src="js/dashboard.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+name: Daily eSIM Catalog Ingestion & Analytics Pipeline
+
+on:
+  schedule:
+    # Runs daily at 04:00 UTC
+    - cron: '0 4 * * *'
+  push:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  etl_pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy
+
+      - name: Run Automated Daily ETL & Anomaly Checks
+        run: |
+          python scripts/automated_daily_etl.py
+          python scripts/process_data.py
+
+      - name: Run Quality Verification Tests
+        run: |
+          python scripts/test_pipeline.py
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
