@@ -236,12 +236,16 @@ def run_etl():
         "distinct_destinations_count": int(df["country_name"].nunique())
     }
 
-    # Write summary stats JSON
+    # Write summary stats JSON & JS (for zero-CORS offline & online loading)
     os.makedirs(PUBLIC_DATA_DIR, exist_ok=True)
     summary_path = os.path.join(PUBLIC_DATA_DIR, "summary_stats.json")
     with open(summary_path, "w", encoding="utf-8") as f:
         json.dump(summary, f, ensure_ascii=False, indent=2)
-    print(f"[OUTPUT] Summary statistics saved to: {summary_path}")
+    
+    summary_js_path = os.path.join(PUBLIC_DATA_DIR, "summary_stats.js")
+    with open(summary_js_path, "w", encoding="utf-8") as f:
+        f.write("window.SUMMARY_DATA = " + json.dumps(summary, ensure_ascii=False) + ";\n")
+    print(f"[OUTPUT] Summary statistics saved to: {summary_path} and {summary_js_path}")
 
     # Prepare catalog dataset for client-side search & filtering
     # Clean records, replace NaN data_gb with null/None
@@ -264,7 +268,11 @@ def run_etl():
     catalog_path = os.path.join(PUBLIC_DATA_DIR, "catalog.json")
     with open(catalog_path, "w", encoding="utf-8") as f:
         json.dump(catalog_records, f, ensure_ascii=False, separators=(",", ":"))
-    print(f"[OUTPUT] Full catalog JSON saved to: {catalog_path} ({len(catalog_records)} records)")
+    
+    catalog_js_path = os.path.join(PUBLIC_DATA_DIR, "catalog.js")
+    with open(catalog_js_path, "w", encoding="utf-8") as f:
+        f.write("window.CATALOG_DATA = " + json.dumps(catalog_records, ensure_ascii=False, separators=(",", ":")) + ";\n")
+    print(f"[OUTPUT] Full catalog JSON & JS saved to: {catalog_path} and {catalog_js_path} ({len(catalog_records)} records)")
 
     print("\n" + "=" * 60)
     print("[RESULTS] OFFICIAL TEST ANSWERS (MYBESTSIM RECRUITMENT):")

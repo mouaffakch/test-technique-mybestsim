@@ -72,21 +72,28 @@ function initTabs() {
   });
 }
 
-// Fetch Precomputed Data
+// Fetch Precomputed Data (supports window global data for zero-CORS file:// protocol and fetch fallback)
 async function loadData() {
   try {
-    const [summaryRes, catalogRes] = await Promise.all([
-      fetch("data/summary_stats.json"),
-      fetch("data/catalog.json")
-    ]);
+    if (window.SUMMARY_DATA && window.CATALOG_DATA) {
+      state.summary = window.SUMMARY_DATA;
+      state.catalog = window.CATALOG_DATA;
+    } else {
+      const [summaryRes, catalogRes] = await Promise.all([
+        fetch("data/summary_stats.json"),
+        fetch("data/catalog.json")
+      ]);
+      state.summary = await summaryRes.json();
+      state.catalog = await catalogRes.json();
+    }
     
-    state.summary = await summaryRes.json();
-    state.catalog = await catalogRes.json();
     state.filteredCatalog = [...state.catalog];
 
     // Populate Provider dropdown filter
     const provSelect = document.getElementById("filterProvider");
     if (provSelect && state.summary.providers) {
+      // Clear any existing options except first
+      provSelect.innerHTML = '<option value="all">Tous les fournisseurs (18)</option>';
       state.summary.providers.forEach(p => {
         const opt = document.createElement("option");
         opt.value = p.provider;
@@ -101,7 +108,7 @@ async function loadData() {
     const banner = document.getElementById("loadingBanner");
     if (banner) {
       banner.innerHTML = `<div class="bg-red-50 text-red-700 p-4 rounded-xl border border-red-200">
-        Erreur de chargement des données. Veuillez vérifier que les fichiers JSON sont accessibles.
+        Erreur de chargement des données. Veuillez vérifier que les fichiers JSON ou JS sont accessibles.
       </div>`;
     }
   }

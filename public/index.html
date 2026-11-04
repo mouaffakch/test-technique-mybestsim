@@ -1144,8 +1144,13 @@ jobs:
     lucide.createIcons();
   </script>
 
-  <!-- Dashboard Engine Script -->
+  <!-- Scripts: Precomputed datasets first to guarantee zero-CORS offline & online operation -->
+  <script src="data/summary_stats.js"></script>
+  <script src="data/catalog.js"></script>
   <script src="js/dashboard.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
 
 </body>
 </html>

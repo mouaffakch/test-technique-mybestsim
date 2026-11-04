@@ -1,0 +1,554 @@
+{
+  "metadata": {
+    "generated_at": "2026-11-04T00:35:34.071827",
+    "source_files_count": 18,
+    "total_records": 5056,
+    "pipeline_version": "2.4.0-prod",
+    "currency": "EUR"
+  },
+  "kpis": {
+    "total_esim_products": 5056,
+    "over_100_eur_count": 56,
+    "over_100_eur_pct": 1.11,
+    "price_range": {
+      "min": 5.36,
+      "max": 154.63,
+      "amplitude": 149.27,
+      "currency": "EUR"
+    },
+    "data_gb_avg_finite": 14.49,
+    "data_gb_median_finite": 5.0,
+    "finite_plans_count": 4403,
+    "finite_plans_pct": 87.08,
+    "unlimited_plans_count": 653,
+    "unlimited_plans_pct": 12.92,
+    "global_average_price": 29.3,
+    "global_median_price": 20.7,
+    "price_per_gb_avg": 3.17,
+    "price_per_gb_median": 2.55
+  },
+  "providers": [
+    {
+      "provider": "Airalo",
+      "total_plans": 722,
+      "pct_catalog": 14.28,
+      "finite_plans": 631,
+      "unlimited_plans": 91,
+      "min_price": 5.38,
+      "max_price": 136.98,
+      "avg_price": 27.05,
+      "median_price": 18.48,
+      "avg_gb": 12.53,
+      "avg_price_per_gb": 3.38,
+      "median_price_per_gb": 2.76,
+      "pct_5g": 30.2,
+      "pct_topup": 52.6
+    },
+    {
+      "provider": "Ubigi",
+      "total_plans": 562,
+      "pct_catalog": 11.12,
+      "finite_plans": 494,
+      "unlimited_plans": 68,
+      "min_price": 5.39,
+      "max_price": 142.88,
+      "avg_price": 29.76,
+      "median_price": 22.1,
+      "avg_gb": 15.74,
+      "avg_price_per_gb": 3.03,
+      "median_price_per_gb": 2.41,
+      "pct_5g": 37.7,
+      "pct_topup": 56.9
+    },
+    {
+      "provider": "eSIMX",
+      "total_plans": 432,
+      "pct_catalog": 8.54,
+      "finite_plans": 377,
+      "unlimited_plans": 55,
+      "min_price": 5.36,
+      "max_price": 136.53,
+      "avg_price": 29.33,
+      "median_price": 19.91,
+      "avg_gb": 14.91,
+      "avg_price_per_gb": 3.15,
+      "median_price_per_gb": 2.51,
+      "pct_5g": 37.3,
+      "pct_topup": 53.2
+    },
+    {
+      "provider": "Saily",
+      "total_plans": 382,
+      "pct_catalog": 7.56,
+      "finite_plans": 326,
+      "unlimited_plans": 56,
+      "min_price": 5.49,
+      "max_price": 142.02,
+      "avg_price": 28.86,
+      "median_price": 21.22,
+      "avg_gb": 14.09,
+      "avg_price_per_gb": 3.22,
+      "median_price_per_gb": 2.6,
+      "pct_5g": 35.9,
+      "pct_topup": 56.8
+    },
+    {
+      "provider": "GigSky",
+      "total_plans": 342,
+      "pct_catalog": 6.76,
+      "finite_plans": 298,
+      "unlimited_plans": 44,
+      "min_price": 5.36,
+      "max_price": 149.53,
+      "avg_price": 30.67,
+      "median_price": 21.34,
+      "avg_gb": 15.6,
+      "avg_price_per_gb": 3.07,
+      "median_price_per_gb": 2.47,
+      "pct_5g": 34.5,
+      "pct_topup": 52.9
+    },
+    {
+      "provider": "Nomad",
+      "total_plans": 312,
+      "pct_catalog": 6.17,
+      "finite_plans": 267,
+      "unlimited_plans": 45,
+      "min_price": 5.38,
+      "max_price": 130.15,
+      "avg_price": 30.21,
+      "median_price": 21.58,
+      "avg_gb": 14.64,
+      "avg_price_per_gb": 3.12,
+      "median_price_per_gb": 2.55,
+      "pct_5g": 35.6,
+      "pct_topup": 55.8
+    },
+    {
+      "provider": "Instabridge",
+      "total_plans": 282,
+      "pct_catalog": 5.58,
+      "finite_plans": 249,
+      "unlimited_plans": 33,
+      "min_price": 5.4,
+      "max_price": 141.03,
+      "avg_price": 30.19,
+      "median_price": 21.71,
+      "avg_gb": 14.68,
+      "avg_price_per_gb": 3.19,
+      "median_price_per_gb": 2.49,
+      "pct_5g": 31.9,
+      "pct_topup": 57.4
+    },
+    {
+      "provider": "aloSIM",
+      "total_plans": 262,
+      "pct_catalog": 5.18,
+      "finite_plans": 225,
+      "unlimited_plans": 37,
+      "min_price": 5.36,
+      "max_price": 154.63,
+      "avg_price": 30.71,
+      "median_price": 25.05,
+      "avg_gb": 15.12,
+      "avg_price_per_gb": 3.16,
+      "median_price_per_gb": 2.37,
+      "pct_5g": 39.3,
+      "pct_topup": 52.7
+    },
+    {
+      "provider": "Holafly",
+      "total_plans": 242,
+      "pct_catalog": 4.79,
+      "finite_plans": 213,
+      "unlimited_plans": 29,
+      "min_price": 5.37,
+      "max_price": 126.91,
+      "avg_price": 27.98,
+      "median_price": 18.57,
+      "avg_gb": 13.31,
+      "avg_price_per_gb": 3.26,
+      "median_price_per_gb": 2.75,
+      "pct_5g": 34.3,
+      "pct_topup": 58.7
+    },
+    {
+      "provider": "Yesim",
+      "total_plans": 222,
+      "pct_catalog": 4.39,
+      "finite_plans": 194,
+      "unlimited_plans": 28,
+      "min_price": 5.36,
+      "max_price": 153.22,
+      "avg_price": 32.1,
+      "median_price": 24.76,
+      "avg_gb": 16.96,
+      "avg_price_per_gb": 2.94,
+      "median_price_per_gb": 2.35,
+      "pct_5g": 35.6,
+      "pct_topup": 54.5
+    },
+    {
+      "provider": "Jetpac",
+      "total_plans": 212,
+      "pct_catalog": 4.19,
+      "finite_plans": 184,
+      "unlimited_plans": 28,
+      "min_price": 5.53,
+      "max_price": 135.33,
+      "avg_price": 29.94,
+      "median_price": 18.96,
+      "avg_gb": 15.08,
+      "avg_price_per_gb": 3.07,
+      "median_price_per_gb": 2.49,
+      "pct_5g": 30.7,
+      "pct_topup": 54.7
+    },
+    {
+      "provider": "Truphone",
+      "total_plans": 202,
+      "pct_catalog": 4.0,
+      "finite_plans": 177,
+      "unlimited_plans": 25,
+      "min_price": 5.47,
+      "max_price": 152.96,
+      "avg_price": 27.41,
+      "median_price": 17.78,
+      "avg_gb": 13.9,
+      "avg_price_per_gb": 3.35,
+      "median_price_per_gb": 2.73,
+      "pct_5g": 37.1,
+      "pct_topup": 50.0
+    },
+    {
+      "provider": "JamboSIM",
+      "total_plans": 182,
+      "pct_catalog": 3.6,
+      "finite_plans": 157,
+      "unlimited_plans": 25,
+      "min_price": 5.46,
+      "max_price": 140.24,
+      "avg_price": 30.98,
+      "median_price": 24.88,
+      "avg_gb": 15.82,
+      "avg_price_per_gb": 2.9,
+      "median_price_per_gb": 2.34,
+      "pct_5g": 33.5,
+      "pct_topup": 49.5
+    },
+    {
+      "provider": "Flexiroam",
+      "total_plans": 172,
+      "pct_catalog": 3.4,
+      "finite_plans": 144,
+      "unlimited_plans": 28,
+      "min_price": 5.38,
+      "max_price": 134.79,
+      "avg_price": 31.31,
+      "median_price": 21.69,
+      "avg_gb": 15.22,
+      "avg_price_per_gb": 3.14,
+      "median_price_per_gb": 2.46,
+      "pct_5g": 34.9,
+      "pct_topup": 55.8
+    },
+    {
+      "provider": "Yatelo",
+      "total_plans": 162,
+      "pct_catalog": 3.2,
+      "finite_plans": 141,
+      "unlimited_plans": 21,
+      "min_price": 5.54,
+      "max_price": 143.83,
+      "avg_price": 30.13,
+      "median_price": 24.02,
+      "avg_gb": 15.04,
+      "avg_price_per_gb": 3.22,
+      "median_price_per_gb": 2.57,
+      "pct_5g": 35.2,
+      "pct_topup": 53.7
+    },
+    {
+      "provider": "Maya Mobile",
+      "total_plans": 152,
+      "pct_catalog": 3.01,
+      "finite_plans": 134,
+      "unlimited_plans": 18,
+      "min_price": 5.98,
+      "max_price": 141.99,
+      "avg_price": 28.91,
+      "median_price": 18.66,
+      "avg_gb": 13.43,
+      "avg_price_per_gb": 3.14,
+      "median_price_per_gb": 2.51,
+      "pct_5g": 34.2,
+      "pct_topup": 45.4
+    },
+    {
+      "provider": "Roamic",
+      "total_plans": 122,
+      "pct_catalog": 2.41,
+      "finite_plans": 109,
+      "unlimited_plans": 13,
+      "min_price": 5.95,
+      "max_price": 147.07,
+      "avg_price": 27.97,
+      "median_price": 20.05,
+      "avg_gb": 13.61,
+      "avg_price_per_gb": 3.21,
+      "median_price_per_gb": 2.5,
+      "pct_5g": 33.6,
+      "pct_topup": 50.8
+    },
+    {
+      "provider": "4S eSIM",
+      "total_plans": 92,
+      "pct_catalog": 1.82,
+      "finite_plans": 83,
+      "unlimited_plans": 9,
+      "min_price": 5.6,
+      "max_price": 128.8,
+      "avg_price": 24.26,
+      "median_price": 15.03,
+      "avg_gb": 10.29,
+      "avg_price_per_gb": 3.59,
+      "median_price_per_gb": 2.93,
+      "pct_5g": 33.7,
+      "pct_topup": 56.5
+    }
+  ],
+  "network": {
+    "count_4g": 3302,
+    "count_5g": 1754,
+    "pct_4g": 65.31,
+    "pct_5g": 34.69,
+    "avg_price_4g": 27.22,
+    "avg_price_5g": 33.22,
+    "premium_5g_pct": 22.0
+  },
+  "top_up": {
+    "count_yes": 2738,
+    "count_no": 2318,
+    "pct_yes": 54.15,
+    "pct_no": 45.85,
+    "avg_price_yes": 29.06,
+    "avg_price_no": 29.59
+  },
+  "validity": [
+    {
+      "days": 7,
+      "label": "7 jours",
+      "count": 1679,
+      "pct": 33.21,
+      "avg_price": 22.9,
+      "min_price": 5.36,
+      "max_price": 76.73
+    },
+    {
+      "days": 15,
+      "label": "15 jours",
+      "count": 1667,
+      "pct": 32.97,
+      "avg_price": 27.34,
+      "min_price": 5.92,
+      "max_price": 84.6
+    },
+    {
+      "days": 30,
+      "label": "30 jours",
+      "count": 1710,
+      "pct": 33.82,
+      "avg_price": 37.5,
+      "min_price": 7.0,
+      "max_price": 154.63
+    }
+  ],
+  "price_distribution": [
+    {
+      "bucket": "Moins de 10 €",
+      "count": 891,
+      "pct": 17.62
+    },
+    {
+      "bucket": "10 € à 25 €",
+      "count": 1913,
+      "pct": 37.84
+    },
+    {
+      "bucket": "25 € à 50 €",
+      "count": 1289,
+      "pct": 25.49
+    },
+    {
+      "bucket": "50 € à 100 €",
+      "count": 907,
+      "pct": 17.94
+    },
+    {
+      "bucket": "Plus de 100 €",
+      "count": 56,
+      "pct": 1.11
+    }
+  ],
+  "gb_tiers": [
+    {
+      "gb": 1,
+      "label": "1 Go",
+      "count": 728,
+      "pct": 14.4
+    },
+    {
+      "gb": 3,
+      "label": "3 Go",
+      "count": 751,
+      "pct": 14.85
+    },
+    {
+      "gb": 5,
+      "label": "5 Go",
+      "count": 767,
+      "pct": 15.17
+    },
+    {
+      "gb": 10,
+      "label": "10 Go",
+      "count": 709,
+      "pct": 14.02
+    },
+    {
+      "gb": 20,
+      "label": "20 Go",
+      "count": 750,
+      "pct": 14.83
+    },
+    {
+      "gb": 50,
+      "label": "50 Go",
+      "count": 698,
+      "pct": 13.81
+    }
+  ],
+  "top_destinations": [
+    {
+      "country_name": "Europe",
+      "country_code": "EU",
+      "total_plans": 206,
+      "avg_price": 42.74,
+      "min_price": 7.52,
+      "unlimited_plans": 29
+    },
+    {
+      "country_name": "Asie",
+      "country_code": "AS",
+      "total_plans": 194,
+      "avg_price": 40.9,
+      "min_price": 7.49,
+      "unlimited_plans": 29
+    },
+    {
+      "country_name": "Monde",
+      "country_code": "WW",
+      "total_plans": 186,
+      "avg_price": 44.41,
+      "min_price": 7.91,
+      "unlimited_plans": 31
+    },
+    {
+      "country_name": "Indonésie",
+      "country_code": "ID",
+      "total_plans": 104,
+      "avg_price": 24.0,
+      "min_price": 5.38,
+      "unlimited_plans": 12
+    },
+    {
+      "country_name": "Arabie saoudite",
+      "country_code": "SA",
+      "total_plans": 102,
+      "avg_price": 25.35,
+      "min_price": 5.52,
+      "unlimited_plans": 8
+    },
+    {
+      "country_name": "Singapour",
+      "country_code": "SG",
+      "total_plans": 99,
+      "avg_price": 27.06,
+      "min_price": 5.47,
+      "unlimited_plans": 14
+    },
+    {
+      "country_name": "États-Unis",
+      "country_code": "US",
+      "total_plans": 98,
+      "avg_price": 26.67,
+      "min_price": 5.37,
+      "unlimited_plans": 13
+    },
+    {
+      "country_name": "Égypte",
+      "country_code": "EG",
+      "total_plans": 98,
+      "avg_price": 28.01,
+      "min_price": 5.38,
+      "unlimited_plans": 14
+    },
+    {
+      "country_name": "Kenya",
+      "country_code": "KE",
+      "total_plans": 96,
+      "avg_price": 29.86,
+      "min_price": 5.39,
+      "unlimited_plans": 15
+    },
+    {
+      "country_name": "Belgique",
+      "country_code": "BE",
+      "total_plans": 96,
+      "avg_price": 27.67,
+      "min_price": 5.38,
+      "unlimited_plans": 12
+    },
+    {
+      "country_name": "Colombie",
+      "country_code": "CO",
+      "total_plans": 95,
+      "avg_price": 31.87,
+      "min_price": 5.36,
+      "unlimited_plans": 19
+    },
+    {
+      "country_name": "Turquie",
+      "country_code": "TR",
+      "total_plans": 93,
+      "avg_price": 27.7,
+      "min_price": 5.48,
+      "unlimited_plans": 12
+    },
+    {
+      "country_name": "Pays-Bas",
+      "country_code": "NL",
+      "total_plans": 93,
+      "avg_price": 22.53,
+      "min_price": 5.52,
+      "unlimited_plans": 10
+    },
+    {
+      "country_name": "Philippines",
+      "country_code": "PH",
+      "total_plans": 92,
+      "avg_price": 24.89,
+      "min_price": 5.76,
+      "unlimited_plans": 16
+    },
+    {
+      "country_name": "Rép. dominicaine",
+      "country_code": "DO",
+      "total_plans": 92,
+      "avg_price": 25.14,
+      "min_price": 5.81,
+      "unlimited_plans": 15
+    }
+  ],
+  "distinct_destinations_count": 54
+}
