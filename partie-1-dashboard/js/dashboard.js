@@ -159,11 +159,18 @@ function animateValue(id, start, end, duration) {
 function renderCharts() {
   if (!state.summary) return;
 
+  // Shared dark chart theme
+  const darkGrid  = "rgba(255,255,255,0.05)";
+  const darkTick  = "#475569";
+  const tooltipBg = "#1e2130";
+  const tooltipBorder = "rgba(255,255,255,0.08)";
+
   // Chart 1: Provider Volume (Horizontal Bar)
   const ctxProviders = document.getElementById("chartProviders")?.getContext("2d");
   if (ctxProviders) {
     const labels = state.summary.providers.map(p => p.provider);
     const data = state.summary.providers.map(p => p.total_plans);
+    const maxVal = Math.max(...data);
 
     state.charts.providers = new Chart(ctxProviders, {
       type: "bar",
@@ -172,8 +179,11 @@ function renderCharts() {
         datasets: [{
           label: "Nombre d'offres",
           data: data,
-          backgroundColor: labels.map((_, i) => i === 0 ? "rgba(37, 99, 235, 0.9)" : "rgba(59, 130, 246, 0.75)"),
-          borderColor: "rgba(37, 99, 235, 1)",
+          backgroundColor: data.map(v => {
+            const ratio = v / maxVal;
+            return `rgba(59,130,246,${0.4 + ratio * 0.55})`;
+          }),
+          borderColor: "rgba(96,165,250,0.5)",
           borderWidth: 1,
           borderRadius: 6
         }]
@@ -185,6 +195,11 @@ function renderCharts() {
         plugins: {
           legend: { display: false },
           tooltip: {
+            backgroundColor: tooltipBg,
+            borderColor: tooltipBorder,
+            borderWidth: 1,
+            titleColor: "#f1f5f9",
+            bodyColor: "#94a3b8",
             callbacks: {
               afterLabel: function(context) {
                 const prov = state.summary.providers[context.dataIndex];
@@ -199,8 +214,12 @@ function renderCharts() {
           }
         },
         scales: {
-          x: { grid: { color: "rgba(226, 232, 240, 0.6)" }, title: { display: true, text: "Nombre de produits répertoriés" } },
-          y: { grid: { display: false } }
+          x: {
+            grid: { color: darkGrid },
+            ticks: { color: darkTick },
+            title: { display: true, text: "Nombre de produits répertoriés", color: darkTick }
+          },
+          y: { grid: { display: false }, ticks: { color: darkTick } }
         }
       }
     });
@@ -209,9 +228,7 @@ function renderCharts() {
   // Chart 2: Price per GB Benchmark by Provider
   const ctxPpg = document.getElementById("chartPricePerGb")?.getContext("2d");
   if (ctxPpg) {
-    // Sort providers by avg_price_per_gb ascending
     const sortedByPpg = [...state.summary.providers].sort((a, b) => a.avg_price_per_gb - b.avg_price_per_gb);
-    
     state.charts.ppg = new Chart(ctxPpg, {
       type: "bar",
       data: {
@@ -219,7 +236,11 @@ function renderCharts() {
         datasets: [{
           label: "Prix moyen par Go (€/Go)",
           data: sortedByPpg.map(p => p.avg_price_per_gb),
-          backgroundColor: sortedByPpg.map(p => p.avg_price_per_gb < 3.0 ? "rgba(16, 185, 129, 0.85)" : (p.avg_price_per_gb < 3.3 ? "rgba(59, 130, 246, 0.8)" : "rgba(245, 158, 11, 0.8)")),
+          backgroundColor: sortedByPpg.map(p =>
+            p.avg_price_per_gb < 3.0 ? "rgba(16,185,129,0.85)" :
+            p.avg_price_per_gb < 3.3 ? "rgba(59,130,246,0.8)" :
+            "rgba(245,158,11,0.8)"
+          ),
           borderRadius: 6
         }]
       },
@@ -229,18 +250,21 @@ function renderCharts() {
         plugins: {
           legend: { display: false },
           tooltip: {
-            callbacks: {
-              label: (ctx) => `Prix moyen au Go : ${ctx.raw.toFixed(2)} €/Go`
-            }
+            backgroundColor: tooltipBg, borderColor: tooltipBorder, borderWidth: 1,
+            titleColor: "#f1f5f9", bodyColor: "#94a3b8",
+            callbacks: { label: (ctx) => `Prix moyen au Go : ${ctx.raw.toFixed(2)} €/Go` }
           }
         },
         scales: {
-          y: { 
-            beginAtZero: true, 
-            title: { display: true, text: "Coût moyen en € / Go" },
-            grid: { color: "rgba(226, 232, 240, 0.6)" }
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: "Coût moyen en € / Go", color: darkTick },
+            grid: { color: darkGrid }, ticks: { color: darkTick }
           },
-          x: { ticks: { autoSkip: false, maxRotation: 45, minRotation: 45 }, grid: { display: false } }
+          x: {
+            ticks: { autoSkip: false, maxRotation: 45, minRotation: 45, color: darkTick },
+            grid: { display: false }
+          }
         }
       }
     });
@@ -256,23 +280,25 @@ function renderCharts() {
         labels: ["4G LTE", "5G Haute Vitesse"],
         datasets: [{
           data: [net.count_4g, net.count_5g],
-          backgroundColor: ["#60a5fa", "#2563eb"],
+          backgroundColor: ["#3b82f6", "#a855f7"],
           borderWidth: 0
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        cutout: "65%",
+        cutout: "68%",
         plugins: {
-          legend: { position: "bottom" },
+          legend: { position: "bottom", labels: { color: "#64748b", padding: 12, font: { size: 11 } } },
           tooltip: {
+            backgroundColor: tooltipBg, borderColor: tooltipBorder, borderWidth: 1,
+            titleColor: "#f1f5f9", bodyColor: "#94a3b8",
             callbacks: {
               label: (ctx) => {
                 const is4G = ctx.dataIndex === 0;
                 const count = is4G ? net.count_4g : net.count_5g;
-                const pct = is4G ? net.pct_4g : net.pct_5g;
-                const avg = is4G ? net.avg_price_4g : net.avg_price_5g;
+                const pct   = is4G ? net.pct_4g   : net.pct_5g;
+                const avg   = is4G ? net.avg_price_4g : net.avg_price_5g;
                 return `${ctx.label}: ${count.toLocaleString()} (${pct}%) — Prix moy: ${avg.toFixed(2)} €`;
               }
             }
@@ -289,26 +315,28 @@ function renderCharts() {
     state.charts.topup = new Chart(ctxTopUp, {
       type: "doughnut",
       data: {
-        labels: ["Rechargeable (Top-up oui)", "Non rechargeable (Jetrice)"],
+        labels: ["Rechargeable", "Usage unique"],
         datasets: [{
           data: [tu.count_yes, tu.count_no],
-          backgroundColor: ["#10b981", "#cbd5e1"],
+          backgroundColor: ["#10b981", "#334155"],
           borderWidth: 0
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        cutout: "65%",
+        cutout: "68%",
         plugins: {
-          legend: { position: "bottom" },
+          legend: { position: "bottom", labels: { color: "#64748b", padding: 12, font: { size: 11 } } },
           tooltip: {
+            backgroundColor: tooltipBg, borderColor: tooltipBorder, borderWidth: 1,
+            titleColor: "#f1f5f9", bodyColor: "#94a3b8",
             callbacks: {
               label: (ctx) => {
                 const isYes = ctx.dataIndex === 0;
                 const count = isYes ? tu.count_yes : tu.count_no;
-                const pct = isYes ? tu.pct_yes : tu.pct_no;
-                const avg = isYes ? tu.avg_price_yes : tu.avg_price_no;
+                const pct   = isYes ? tu.pct_yes   : tu.pct_no;
+                const avg   = isYes ? tu.avg_price_yes : tu.avg_price_no;
                 return `${ctx.label}: ${count.toLocaleString()} (${pct}%) — Prix moy: ${avg.toFixed(2)} €`;
               }
             }
@@ -329,7 +357,7 @@ function renderCharts() {
         datasets: [{
           label: "Nombre d'offres",
           data: buckets.map(b => b.count),
-          backgroundColor: ["#93c5fd", "#60a5fa", "#3b82f6", "#2563eb", "#ef4444"],
+          backgroundColor: ["rgba(96,165,250,0.5)","rgba(59,130,246,0.65)","rgba(37,99,235,0.8)","rgba(29,78,216,0.9)","rgba(239,68,68,0.8)"],
           borderRadius: 6
         }]
       },
@@ -339,20 +367,23 @@ function renderCharts() {
         plugins: {
           legend: { display: false },
           tooltip: {
-            callbacks: {
-              label: (ctx) => `${ctx.raw} offres (${buckets[ctx.dataIndex].pct}%)`
-            }
+            backgroundColor: tooltipBg, borderColor: tooltipBorder, borderWidth: 1,
+            titleColor: "#f1f5f9", bodyColor: "#94a3b8",
+            callbacks: { label: (ctx) => `${ctx.raw} offres (${buckets[ctx.dataIndex].pct}%)` }
           }
         },
         scales: {
-          y: { grid: { color: "rgba(226, 232, 240, 0.6)" }, title: { display: true, text: "Nombre de forfaits" } },
-          x: { grid: { display: false } }
+          y: {
+            grid: { color: darkGrid }, ticks: { color: darkTick },
+            title: { display: true, text: "Nombre de forfaits", color: darkTick }
+          },
+          x: { grid: { display: false }, ticks: { color: darkTick } }
         }
       }
     });
   }
 
-  // Chart 6: Validity Days (7, 15, 30 days)
+  // Chart 6: Validity Days
   const ctxValidity = document.getElementById("chartValidity")?.getContext("2d");
   if (ctxValidity) {
     const val = state.summary.validity;
@@ -365,7 +396,7 @@ function renderCharts() {
             type: "bar",
             label: "Volume d'offres",
             data: val.map(v => v.count),
-            backgroundColor: "rgba(59, 130, 246, 0.7)",
+            backgroundColor: "rgba(59,130,246,0.6)",
             yAxisID: "yVolume",
             borderRadius: 6
           },
@@ -374,31 +405,34 @@ function renderCharts() {
             label: "Prix moyen (€)",
             data: val.map(v => v.avg_price),
             borderColor: "#f59e0b",
-            backgroundColor: "#f59e0b",
+            backgroundColor: "rgba(245,158,11,0.15)",
             yAxisID: "yPrice",
-            tension: 0.2,
-            borderWidth: 3,
-            pointRadius: 5
+            tension: 0.3,
+            borderWidth: 2.5,
+            pointRadius: 4,
+            pointBackgroundColor: "#f59e0b"
           }
         ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { color: "#64748b", font: { size: 11 } } },
+          tooltip: { backgroundColor: tooltipBg, borderColor: tooltipBorder, borderWidth: 1, titleColor: "#f1f5f9", bodyColor: "#94a3b8" }
+        },
         scales: {
           yVolume: {
-            type: "linear",
-            position: "left",
-            title: { display: true, text: "Nombre d'offres" },
-            grid: { color: "rgba(226, 232, 240, 0.6)" }
+            type: "linear", position: "left",
+            title: { display: true, text: "Nombre d'offres", color: darkTick },
+            grid: { color: darkGrid }, ticks: { color: darkTick }
           },
           yPrice: {
-            type: "linear",
-            position: "right",
-            title: { display: true, text: "Prix moyen (€)" },
-            grid: { display: false }
+            type: "linear", position: "right",
+            title: { display: true, text: "Prix moyen (€)", color: darkTick },
+            grid: { display: false }, ticks: { color: darkTick }
           },
-          x: { grid: { display: false } }
+          x: { grid: { display: false }, ticks: { color: darkTick } }
         }
       }
     });
@@ -578,9 +612,10 @@ function renderTable() {
   }
 
   if (total === 0) {
-    tbody.innerHTML = `<tr><td colspan="8" class="text-center py-12 text-slate-400">
-      <div class="text-lg font-medium">Aucun forfait ne correspond à vos critères de recherche.</div>
-      <p class="text-sm mt-1">Essayez d'ajuster vos filtres ou de réinitialiser la recherche.</p>
+    tbody.innerHTML = `<tr><td colspan="8" class="text-center py-16 text-slate-500">
+      <div class="text-4xl mb-3">🔍</div>
+      <div class="text-sm font-semibold text-slate-400">Aucun forfait ne correspond à vos critères.</div>
+      <p class="text-xs mt-1 text-slate-600">Ajustez vos filtres ou réinitialisez la recherche.</p>
     </td></tr>`;
     if (paginationControls) paginationControls.innerHTML = "";
     return;
@@ -597,35 +632,38 @@ function renderTable() {
     const isTopup = item.topup === "oui";
 
     return `
-      <tr class="hover:bg-blue-50/40 transition-colors border-b border-slate-100 text-sm">
-        <td class="py-3 px-4 font-mono text-xs text-slate-500">${escapeHtml(item.sku)}</td>
-        <td class="py-3 px-4 font-semibold text-slate-800 flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full ${isUnlimited ? 'bg-purple-500' : 'bg-blue-500'}"></span>
-          ${escapeHtml(item.prov)}
-        </td>
-        <td class="py-3 px-4 text-slate-700">
-          <div class="font-medium">${escapeHtml(item.country)}</div>
-          <div class="text-xs text-slate-400">${escapeHtml(item.name)}</div>
+      <tr class="text-sm transition-colors">
+        <td class="py-3 px-4 font-mono text-xs text-slate-600">${escapeHtml(item.sku)}</td>
+        <td class="py-3 px-4">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full shrink-0 ${isUnlimited ? 'bg-purple-500' : 'bg-blue-500'}"></span>
+            <span class="font-semibold text-slate-200">${escapeHtml(item.prov)}</span>
+          </div>
         </td>
         <td class="py-3 px-4">
-          ${isUnlimited 
-            ? `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-purple-100 text-purple-700">Illimité</span>` 
-            : `<span class="font-bold text-slate-800">${item.gb} Go</span>`
+          <div class="font-medium text-slate-200">${escapeHtml(item.country)}</div>
+          <div class="text-xs text-slate-600">${escapeHtml(item.name)}</div>
+        </td>
+        <td class="py-3 px-4">
+          ${isUnlimited
+            ? `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-purple-500/15 text-purple-400 border border-purple-500/20">Illimité</span>`
+            : `<span class="font-bold text-slate-200">${item.gb} Go</span>`
           }
         </td>
-        <td class="py-3 px-4 text-slate-600">${item.days} jours</td>
-        <td class="py-3 px-4 font-bold ${isOver100 ? 'text-amber-600' : 'text-slate-900'}">
+        <td class="py-3 px-4 text-slate-400 text-xs">${item.days}j</td>
+        <td class="py-3 px-4 font-bold ${isOver100 ? 'text-amber-400' : 'text-slate-100'}">
           ${item.price.toFixed(2)} €
-          ${isOver100 ? '<span class="ml-1 text-xs bg-amber-100 text-amber-700 px-1.5 py-0.2 rounded font-normal">&gt;100€</span>' : ''}
+          ${isOver100 ? '<span class="ml-1 text-[10px] bg-amber-500/15 text-amber-400 px-1.5 py-0.5 rounded border border-amber-500/20 font-normal">Premium</span>' : ''}
         </td>
         <td class="py-3 px-4">
-          <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold ${is5G ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-100 text-slate-600'}">
+          <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold ${is5G ? 'bg-purple-500/15 text-purple-400 border border-purple-500/20' : 'bg-slate-500/15 text-slate-400 border border-slate-500/20'}">
             ${item.net}
           </span>
         </td>
         <td class="py-3 px-4">
-          <span class="inline-flex items-center gap-1 text-xs ${isTopup ? 'text-emerald-700 font-medium' : 'text-slate-400'}">
-            ${isTopup ? '● Rechargeable' : '○ Usage unique'}
+          <span class="inline-flex items-center gap-1.5 text-xs font-medium ${isTopup ? 'text-emerald-400' : 'text-slate-600'}">
+            <span class="w-1.5 h-1.5 rounded-full ${isTopup ? 'bg-emerald-500' : 'bg-slate-600'}"></span>
+            ${isTopup ? 'Rechargeable' : 'Usage unique'}
           </span>
         </td>
       </tr>

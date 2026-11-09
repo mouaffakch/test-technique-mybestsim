@@ -5,405 +5,613 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MyBestSim — Dashboard Data & Automatisation eSIM</title>
   <meta name="description" content="Dashboard interactif d'analyse de 5 056 forfaits eSIM et pipeline d'automatisation ETL pour MyBestSim.">
-  
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
+
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-blue-500 selection:text-white">
+<body class="bg-[#0f1117] text-slate-100 font-sans antialiased selection:bg-blue-500 selection:text-white">
 
-  <!-- TOP HEADER -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white font-black text-xl shadow-md">
-            M
-          </div>
-          <div>
-            <span class="text-xl font-black tracking-tight text-slate-900">MyBest<span class="text-blue-600">Sim</span></span>
-            <span class="ml-2 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-700">Data &amp; Automatisation</span>
-          </div>
+  <!-- ══════════════════════════════════════════════════════════
+       SIDEBAR (desktop)
+  ══════════════════════════════════════════════════════════ -->
+  <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-[#13161f] border-r border-white/5 z-40 flex flex-col transition-transform duration-300 sidebar-desktop">
+
+    <!-- Logo -->
+    <div class="px-6 py-5 border-b border-white/5">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white font-black text-lg shadow-lg shadow-blue-500/30">M</div>
+        <div>
+          <span class="text-base font-black tracking-tight text-white">MyBest<span class="text-blue-400">Sim</span></span>
+          <div class="text-[10px] text-slate-500 font-medium leading-none mt-0.5">Data & Automatisation</div>
         </div>
-
-        <div class="flex items-center gap-3">
-          <div class="text-right hidden sm:block">
-            <div class="text-xs font-bold text-slate-900">Mouaffak Chouaibi</div>
-            <div class="text-[11px] text-slate-500">Stagiaire Développeur IA &amp; Automatisation</div>
-          </div>
-          <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> ETL Synchro
-          </span>
-        </div>
-
-      </div>
-    </div>
-  </header>
-
-  <!-- SUBHEADER STATUS -->
-  <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white py-2 px-4 text-xs font-medium">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-      <div class="flex items-center gap-2">
-        <i data-lucide="database" class="w-3.5 h-3.5 text-blue-400"></i>
-        <span>Ingestion quotidienne automatisée : 18/18 fournisseurs synchronisés</span>
-      </div>
-      <div class="flex items-center gap-4 text-slate-300">
-        <span>Produits répertoriés : <strong class="text-white">5 056</strong></span>
-        <span>Fournisseurs : <strong class="text-white">18</strong></span>
-        <span>Devise : <strong class="text-white">EUR (€)</strong></span>
-      </div>
-    </div>
-  </div>
-
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-
-    <!-- HERO HEADER -->
-    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm relative overflow-hidden">
-      <div class="absolute -right-10 -bottom-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="max-w-3xl">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 mb-3">
-          <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i> Partie 1 : Data &amp; Automatisation
-        </span>
-        <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-          Dashboard Analytique du Catalogue eSIM
-        </h1>
-        <p class="mt-3 text-base text-slate-600 leading-relaxed">
-          Ce tableau de bord traite l'ensemble des fichiers CSV fournisseurs reçus quotidiennement. Il calcule les statistiques clés, met en lumière la compétitivité tarifaire et propose un explorateur interactif avec recherche en temps réel et export CSV.
-        </p>
       </div>
     </div>
 
-    <!-- 6 PRIMARY KPI CARDS -->
-    <div>
-      <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-        <i data-lucide="gauge" class="w-5 h-5 text-blue-600"></i>
-        Statistiques Clés du Catalogue (Indicateurs Officiels)
-      </h2>
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-        
-        <!-- KPI 1: Total eSIMs -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm hover-card">
-          <div class="flex items-center justify-between text-slate-500 mb-2">
-            <span class="text-xs font-bold uppercase tracking-wider">1. Total eSIMs</span>
-            <div class="p-2 rounded-xl bg-blue-50 text-blue-600"><i data-lucide="sim-card" class="w-4 h-4"></i></div>
-          </div>
-          <div class="text-3xl font-extrabold text-slate-900" id="kpiTotalEsims">5 056</div>
-          <div class="mt-2 text-xs text-slate-500">
-            <span class="text-emerald-600 font-semibold">18 fournisseurs</span> agrégés
-          </div>
-        </div>
+    <!-- Nav -->
+    <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+      <div class="text-[10px] font-bold uppercase tracking-widest text-slate-600 px-3 pb-2">Navigation</div>
+      <a href="#hero-section"    class="sidebar-link active" data-section="hero-section">
+        <i data-lucide="layout-dashboard" class="w-4 h-4 shrink-0"></i> Vue d'ensemble
+      </a>
+      <a href="#kpi-section"     class="sidebar-link" data-section="kpi-section">
+        <i data-lucide="gauge" class="w-4 h-4 shrink-0"></i> KPIs Clés
+      </a>
+      <a href="#charts-section"  class="sidebar-link" data-section="charts-section">
+        <i data-lucide="bar-chart-2" class="w-4 h-4 shrink-0"></i> Analyses & Graphiques
+      </a>
+      <a href="#explorer-section" class="sidebar-link" data-section="explorer-section">
+        <i data-lucide="table-2" class="w-4 h-4 shrink-0"></i> Explorateur Catalogue
+      </a>
+      <a href="#pipeline-section" class="sidebar-link" data-section="pipeline-section">
+        <i data-lucide="git-branch" class="w-4 h-4 shrink-0"></i> Pipeline ETL
+      </a>
+    </nav>
 
-        <!-- KPI 2: Products > 100 EUR -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm hover-card">
-          <div class="flex items-center justify-between text-slate-500 mb-2">
-            <span class="text-xs font-bold uppercase tracking-wider">2. Forfaits &gt; 100 €</span>
-            <div class="p-2 rounded-xl bg-amber-50 text-amber-600"><i data-lucide="crown" class="w-4 h-4"></i></div>
-          </div>
-          <div class="text-3xl font-extrabold text-amber-600" id="kpiOver100">56</div>
-          <div class="mt-2 text-xs text-slate-500" id="kpiOver100Pct">
-            1.11% du catalogue (Premium)
-          </div>
-        </div>
-
-        <!-- KPI 3: Price Range -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm hover-card">
-          <div class="flex items-center justify-between text-slate-500 mb-2">
-            <span class="text-xs font-bold uppercase tracking-wider">3. Fourchette Prix</span>
-            <div class="p-2 rounded-xl bg-emerald-50 text-emerald-600"><i data-lucide="arrow-left-right" class="w-4 h-4"></i></div>
-          </div>
-          <div class="text-2xl font-extrabold text-slate-900">
-            <span id="kpiPriceMin">5.36 €</span> - <span id="kpiPriceMax">154.63 €</span>
-          </div>
-          <div class="mt-2 text-xs text-slate-500" id="kpiPriceSpan">
-            Amplitude : 149.27 €
-          </div>
-        </div>
-
-        <!-- KPI 4: Average Data (GB) -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm hover-card">
-          <div class="flex items-center justify-between text-slate-500 mb-2">
-            <span class="text-xs font-bold uppercase tracking-wider">4. Moyenne Data</span>
-            <div class="p-2 rounded-xl bg-purple-50 text-purple-600"><i data-lucide="hard-drive" class="w-4 h-4"></i></div>
-          </div>
-          <div class="text-3xl font-extrabold text-purple-700" id="kpiAvgGb">14.49 Go</div>
-          <div class="mt-2 text-xs text-slate-500" id="kpiUnlimitedCount">
-            + 653 illimités (12.91%)
-          </div>
-        </div>
-
-        <!-- KPI 5: Global Average Price -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm hover-card">
-          <div class="flex items-center justify-between text-slate-500 mb-2">
-            <span class="text-xs font-bold uppercase tracking-wider">5. Prix Moyen Global</span>
-            <div class="p-2 rounded-xl bg-indigo-50 text-indigo-600"><i data-lucide="coins" class="w-4 h-4"></i></div>
-          </div>
-          <div class="text-3xl font-extrabold text-indigo-700" id="kpiAvgPrice">29.30 €</div>
-          <div class="mt-2 text-xs text-slate-500" id="kpiMedianPrice">
-            Médiane : 20.70 €
-          </div>
-        </div>
-
-        <!-- KPI 6 BONUS: Average Price per GB -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm hover-card">
-          <div class="flex items-center justify-between text-slate-500 mb-2">
-            <span class="text-xs font-bold uppercase tracking-wider">7. Prix moyen / Go</span>
-            <div class="p-2 rounded-xl bg-cyan-50 text-cyan-600"><i data-lucide="calculator" class="w-4 h-4"></i></div>
-          </div>
-          <div class="text-3xl font-extrabold text-cyan-700" id="kpiPricePerGb">3.17 €</div>
-          <div class="mt-2 text-xs text-slate-500" id="kpiMedianPricePerGb">
-            Médiane : 2.55 € / Go
-          </div>
-        </div>
-
+    <!-- Status pill -->
+    <div class="p-4 border-t border-white/5">
+      <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-3 text-xs text-emerald-400 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+        <span>ETL Synchro — 18/18 OK</span>
+      </div>
+      <div class="mt-3 text-[11px] text-slate-600 leading-tight px-1">
+        <div class="font-semibold text-slate-400">Mouaffak Chouaibi</div>
+        Stagiaire Développeur IA & Automatisation
       </div>
     </div>
+  </aside>
 
-    <!-- METHODOLOGICAL NOTE (Q4 UNLIMITED DATA EXPLANATION) -->
-    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 text-sm text-slate-700">
-      <div class="flex items-start gap-3">
-        <div class="p-2 bg-blue-600 text-white rounded-xl shrink-0"><i data-lucide="info" class="w-5 h-5"></i></div>
-        <div class="space-y-1">
-          <h3 class="font-bold text-slate-900">Rigueur Analytique &amp; Prise de Décision (Question 4 : Moyenne de Data)</h3>
-          <p class="leading-relaxed text-xs sm:text-sm">
-            Lors de l'audit des données, nous avons identifié que <strong>653 offres (12.91%)</strong> sont des forfaits à <strong>Data Illimitée</strong> (valeur <code class="bg-white px-1.5 py-0.5 rounded font-mono text-blue-700 text-xs">NaN</code> dans <code class="font-mono text-xs">data_gb</code> et <code class="font-mono text-xs">data_display = "Illimité"</code>). 
-            Injecter une valeur arbitraire (ex: 999 Go) aurait faussé la moyenne à plus de 140 Go. 
-            La moyenne de <strong>14.49 Go</strong> est donc rigoureusement calculée sur les <strong>4 403 offres volumiques</strong>, tout en isolant et quantifiant précisément la part d'illimité.
+  <!-- Mobile overlay -->
+  <div id="mobileOverlay" class="fixed inset-0 bg-black/60 z-30 hidden lg:hidden" onclick="toggleSidebar()"></div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MAIN WRAPPER (offset by sidebar on desktop)
+  ══════════════════════════════════════════════════════════ -->
+  <div class="lg:pl-64 min-h-screen flex flex-col">
+
+    <!-- TOP BAR (mobile) -->
+    <header class="sticky top-0 z-30 bg-[#13161f]/80 backdrop-blur-md border-b border-white/5 h-14 flex items-center px-4 lg:px-6 gap-4">
+      <!-- Hamburger (mobile only) -->
+      <button class="lg:hidden p-2 rounded-lg hover:bg-white/5 transition" onclick="toggleSidebar()">
+        <i data-lucide="menu" class="w-5 h-5 text-slate-400"></i>
+      </button>
+
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-2 text-sm text-slate-500 flex-1">
+        <span class="text-blue-400 font-semibold">MyBestSim</span>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+        <span>Dashboard Analytique eSIM</span>
+      </div>
+
+      <!-- Right status -->
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 text-xs bg-[#1e2130] border border-white/8 px-3 py-1.5 rounded-full text-slate-400">
+          <i data-lucide="database" class="w-3.5 h-3.5 text-blue-400"></i>
+          <span><strong class="text-white">5 056</strong> offres · <strong class="text-white">18</strong> fournisseurs</span>
+        </div>
+        <div class="hidden sm:block text-[10px] text-slate-600 text-right leading-tight">
+          <div class="text-slate-400 font-semibold">Mise à jour</div>
+          <div id="lastUpdated" class="text-slate-500">chaque jour à 04:00 UTC</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════
+         MAIN CONTENT
+    ══════════════════════════════════════════════════════ -->
+    <main class="flex-1 px-4 sm:px-6 lg:px-8 py-8 space-y-10 max-w-[1400px] w-full mx-auto">
+
+      <!-- ── HERO SECTION ──────────────────────────────────── -->
+      <section id="hero-section" class="relative overflow-hidden rounded-3xl hero-gradient p-8 sm:p-10">
+        <!-- Animated orbs -->
+        <div class="absolute -top-20 -right-20 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+        <div class="absolute -bottom-20 left-20 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none animate-pulse-slower"></div>
+
+        <!-- Grid pattern overlay -->
+        <div class="absolute inset-0 opacity-[0.03] grid-pattern pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-3xl">
+          <div class="flex flex-wrap items-center gap-3 mb-5">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/15 text-blue-300 border border-blue-500/20 backdrop-blur-sm">
+              <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i> Partie 1 : Data & Automatisation
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live ETL · Nov 2026
+            </span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+            Dashboard Analytique<br>
+            <span class="text-gradient-hero">Catalogue eSIM</span>
+          </h1>
+
+          <p class="mt-4 text-base text-slate-400 leading-relaxed max-w-2xl">
+            Pipeline d'ingestion automatisé traitant <strong class="text-white">18 fournisseurs partenaires</strong> quotidiennement.
+            Calcul vectorisé des KPIs, détection d'anomalies, et explorateur interactif avec export CSV — conçu pour optimiser la compétitivité tarifaire de MyBestSim.
           </p>
-        </div>
-      </div>
-    </div>
 
-    <!-- CHARTS SECTION -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      
-      <!-- Chart 1: Répartition par fournisseur (Question 6) -->
-      <div class="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h3 class="text-base font-bold text-slate-900">6. Répartition par Fournisseur</h3>
-            <p class="text-xs text-slate-500">Volume de cartes eSIM répertoriées par marque partenaire</p>
+          <!-- Mini stats row -->
+          <div class="mt-7 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 text-center">
+              <div class="text-2xl font-black text-white">5 056</div>
+              <div class="text-xs text-slate-500 mt-0.5">Forfaits répertoriés</div>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 text-center">
+              <div class="text-2xl font-black text-white">18</div>
+              <div class="text-xs text-slate-500 mt-0.5">Fournisseurs agrégés</div>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 text-center">
+              <div class="text-2xl font-black text-white">7/7</div>
+              <div class="text-xs text-slate-500 mt-0.5">Tests unitaires ✓</div>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 text-center">
+              <div class="text-2xl font-black text-white">04:00</div>
+              <div class="text-xs text-slate-500 mt-0.5">Sync UTC / jour</div>
+            </div>
           </div>
-          <span class="text-xs font-semibold px-2.5 py-1 bg-blue-50 text-blue-700 rounded-lg">18 Partenaires</span>
         </div>
-        <div class="relative flex-1 min-h-[360px]">
-          <canvas id="chartProviders"></canvas>
-        </div>
-      </div>
+      </section>
 
-      <!-- Chart 2: Benchmark Prix/Go par fournisseur -->
-      <div class="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h3 class="text-base font-bold text-slate-900">7. Benchmark Compétitivité au Go (€/Go)</h3>
-            <p class="text-xs text-slate-500">Du fournisseur le plus économique au plus onéreux</p>
+      <!-- ── KPI CARDS ──────────────────────────────────────── -->
+      <section id="kpi-section">
+        <div class="flex items-center justify-between mb-5">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-blue-500/15 border border-blue-500/20 flex items-center justify-center">
+              <i data-lucide="gauge" class="w-4 h-4 text-blue-400"></i>
+            </div>
+            <div>
+              <h2 class="text-base font-bold text-white">Indicateurs Clés du Catalogue</h2>
+              <p class="text-xs text-slate-500">Statistiques officielles calculées sur 5 056 offres</p>
+            </div>
           </div>
-          <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-lg">Moins cher : JamboSIM</span>
-        </div>
-        <div class="relative flex-1 min-h-[360px]">
-          <canvas id="chartPricePerGb"></canvas>
-        </div>
-      </div>
-
-      <!-- Chart 3 & 4: 4G/5G & Top-Up -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col">
-          <h4 class="text-sm font-bold text-slate-900 mb-1">Réseau 4G vs 5G</h4>
-          <p class="text-xs text-slate-500 mb-3">Part et surcoût 5G (+22% en moyenne)</p>
-          <div class="relative flex-1 min-h-[190px]">
-            <canvas id="chartNetwork"></canvas>
-          </div>
-        </div>
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col">
-          <h4 class="text-sm font-bold text-slate-900 mb-1">Rechargeabilité (Top-up)</h4>
-          <p class="text-xs text-slate-500 mb-3">54.1% de cartes rechargeables</p>
-          <div class="relative flex-1 min-h-[190px]">
-            <canvas id="chartTopUp"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <!-- Chart 5 & 6: Durée de validité & Tranches de Prix -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col">
-          <h4 class="text-sm font-bold text-slate-900 mb-1">Durée de Validité</h4>
-          <p class="text-xs text-slate-500 mb-3">Volume et prix moyen par durée</p>
-          <div class="relative flex-1 min-h-[190px]">
-            <canvas id="chartValidity"></canvas>
-          </div>
-        </div>
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col">
-          <h4 class="text-sm font-bold text-slate-900 mb-1">Histogramme des Prix</h4>
-          <p class="text-xs text-slate-500 mb-3">Segmentation par tranche budgétaire</p>
-          <div class="relative flex-1 min-h-[190px]">
-            <canvas id="chartPriceBuckets"></canvas>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- INTERACTIVE CATALOG EXPLORER TABLE -->
-    <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden">
-      
-      <!-- Table Filter Bar -->
-      <div class="p-6 border-b border-slate-100 space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h3 class="text-xl font-bold text-slate-900">Explorateur Interactif du Catalogue</h3>
-            <p class="text-xs sm:text-sm text-slate-500" id="tableFilteredCount">Initialisation des 5 056 offres...</p>
-          </div>
-          
-          <div class="flex items-center gap-2">
-            <button id="resetFiltersBtn" class="px-3 py-2 text-xs font-semibold rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition flex items-center gap-1.5">
-              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Réinitialiser
-            </button>
-            <button id="exportCsvBtn" class="px-4 py-2 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition flex items-center gap-1.5 shadow-sm">
-              <i data-lucide="download" class="w-3.5 h-3.5"></i> Exporter la sélection (.CSV)
-            </button>
-          </div>
+          <span class="text-xs text-slate-600 hidden sm:block">Questions 1–7 du test</span>
         </div>
 
-        <!-- Filter Controls -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 pt-2">
-          
-          <!-- Search Query -->
-          <div class="lg:col-span-2">
-            <label class="block text-xs font-bold text-slate-600 mb-1">Recherche globale</label>
-            <div class="relative">
-              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
-              <input type="text" id="searchInput" placeholder="Pays, fournisseur, SKU (ex: Japon, Airalo)..." class="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition">
+        <!-- KPI Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+
+          <!-- KPI 1: Total eSIMs -->
+          <div class="kpi-card border-t-blue-500">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">1. Total eSIMs</span>
+              <div class="kpi-icon bg-blue-500/15 text-blue-400"><i data-lucide="sim-card" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-3xl font-black text-white" id="kpiTotalEsims">5 056</div>
+            <div class="mt-3">
+              <div class="flex justify-between text-[10px] text-slate-500 mb-1">
+                <span>18 fournisseurs agrégés</span><span class="text-blue-400">100%</span>
+              </div>
+              <div class="kpi-bar"><div class="kpi-bar-fill bg-blue-500" style="width:100%"></div></div>
             </div>
           </div>
 
-          <!-- Provider Filter -->
-          <div>
-            <label class="block text-xs font-bold text-slate-600 mb-1">Fournisseur</label>
-            <select id="filterProvider" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
-              <option value="all">Tous les fournisseurs (18)</option>
-            </select>
-          </div>
-
-          <!-- Network Filter -->
-          <div>
-            <label class="block text-xs font-bold text-slate-600 mb-1">Réseau</label>
-            <select id="filterNetwork" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
-              <option value="all">Tous réseaux</option>
-              <option value="5G">5G Uniquement</option>
-              <option value="4G">4G LTE Uniquement</option>
-            </select>
-          </div>
-
-          <!-- Top-Up Filter -->
-          <div>
-            <label class="block text-xs font-bold text-slate-600 mb-1">Recharge (Top-up)</label>
-            <select id="filterTopup" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
-              <option value="all">Tous types</option>
-              <option value="oui">Rechargeable (oui)</option>
-              <option value="non">Non rechargeable (non)</option>
-            </select>
-          </div>
-
-          <!-- Max Price Slider -->
-          <div>
-            <div class="flex justify-between items-center text-xs font-bold text-slate-600 mb-1">
-              <span>Prix max :</span>
-              <span id="maxPriceVal" class="text-blue-600 font-extrabold">200 €</span>
+          <!-- KPI 2: > 100 EUR -->
+          <div class="kpi-card border-t-amber-500">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">2. Forfaits &gt;100€</span>
+              <div class="kpi-icon bg-amber-500/15 text-amber-400"><i data-lucide="crown" class="w-4 h-4"></i></div>
             </div>
-            <input type="range" id="filterMaxPrice" min="5" max="160" value="200" step="5" class="w-full accent-blue-600 cursor-pointer">
+            <div class="text-3xl font-black text-amber-400" id="kpiOver100">56</div>
+            <div class="mt-3">
+              <div class="flex justify-between text-[10px] text-slate-500 mb-1">
+                <span id="kpiOver100Pct">1.11% du catalogue</span><span class="text-amber-400">Premium</span>
+              </div>
+              <div class="kpi-bar"><div class="kpi-bar-fill bg-amber-500" style="width:1.11%"></div></div>
+            </div>
+          </div>
+
+          <!-- KPI 3: Fourchette Prix -->
+          <div class="kpi-card border-t-emerald-500">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">3. Fourchette Prix</span>
+              <div class="kpi-icon bg-emerald-500/15 text-emerald-400"><i data-lucide="arrow-left-right" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-xl font-black text-white leading-tight">
+              <span id="kpiPriceMin" class="text-emerald-400">5.36 €</span>
+              <span class="text-slate-600 text-base mx-1">→</span>
+              <span id="kpiPriceMax" class="text-red-400">154.63 €</span>
+            </div>
+            <div class="mt-3 text-[10px] text-slate-500">
+              <span id="kpiPriceSpan">Amplitude : 149.27 €</span>
+              <div class="mt-1 h-1 rounded-full bg-gradient-to-r from-emerald-500 via-blue-500 to-red-500 opacity-70"></div>
+            </div>
+          </div>
+
+          <!-- KPI 4: Moyenne Data -->
+          <div class="kpi-card border-t-purple-500">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">4. Moy. Data</span>
+              <div class="kpi-icon bg-purple-500/15 text-purple-400"><i data-lucide="hard-drive" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-3xl font-black text-purple-400" id="kpiAvgGb">14.49 Go</div>
+            <div class="mt-3">
+              <div class="text-[10px] text-slate-500" id="kpiUnlimitedCount">+ 653 illimités (12.91%)</div>
+              <div class="mt-1 kpi-bar"><div class="kpi-bar-fill bg-purple-500" style="width:87.09%"></div></div>
+            </div>
+          </div>
+
+          <!-- KPI 5: Prix Moyen Global -->
+          <div class="kpi-card border-t-indigo-500">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">5. Prix Moyen</span>
+              <div class="kpi-icon bg-indigo-500/15 text-indigo-400"><i data-lucide="coins" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-3xl font-black text-indigo-400" id="kpiAvgPrice">29.30 €</div>
+            <div class="mt-3 text-[10px] text-slate-500">
+              <span id="kpiMedianPrice">Médiane : 20.70 €</span>
+              <div class="mt-1 flex gap-1">
+                <div class="h-1 rounded-full bg-indigo-500/60 flex-1"></div>
+                <div class="h-1 rounded-full bg-indigo-300/40 flex-[0.4]"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI 6: Prix / Go -->
+          <div class="kpi-card border-t-cyan-500">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">7. Prix / Go</span>
+              <div class="kpi-icon bg-cyan-500/15 text-cyan-400"><i data-lucide="calculator" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-3xl font-black text-cyan-400" id="kpiPricePerGb">3.17 €</div>
+            <div class="mt-3 text-[10px] text-slate-500">
+              <span id="kpiMedianPricePerGb">Médiane : 2.55 € / Go</span>
+              <div class="mt-1 kpi-bar"><div class="kpi-bar-fill bg-cyan-500" style="width:65%"></div></div>
+            </div>
           </div>
 
         </div>
-      </div>
+      </section>
 
-      <!-- Table -->
-      <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="bg-slate-50/80 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
-              <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="sku">SKU ↕</th>
-              <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="prov">Fournisseur ↕</th>
-              <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="country">Destination &amp; Offre ↕</th>
-              <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="gb">Volume Data ↕</th>
-              <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="days">Validité ↕</th>
-              <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="price">Prix (€) ↕</th>
-              <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="net">Réseau ↕</th>
-              <th class="py-3.5 px-4 cursor-pointer hover:text-blue-600" data-sort-col="topup">Recharge ↕</th>
-            </tr>
-          </thead>
-          <tbody id="catalogTableBody" class="divide-y divide-slate-100">
-            <!-- Dynamic rows injected by dashboard.js -->
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Pagination -->
-      <div class="p-4 border-t border-slate-100 bg-slate-50/50 flex flex-wrap items-center justify-between gap-4">
-        <div class="flex items-center gap-2 text-xs text-slate-600">
-          <span>Afficher par page :</span>
-          <select id="pageSizeSelect" class="bg-white border border-slate-200 rounded-lg px-2 py-1 outline-none">
-            <option value="25" selected>25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-          </select>
-        </div>
-        <div id="paginationControls"></div>
-      </div>
-
-    </div>
-
-    <!-- ARCHITECTURE & PIPELINE ETL SECTION -->
-    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
-      <div>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-2">
-          <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Ingénierie &amp; Automatisation
-        </span>
-        <h3 class="text-2xl font-black text-slate-900">Pipeline d'Ingestion &amp; Détection d'Anomalies</h3>
-        <p class="text-sm text-slate-600 mt-1">Architecture automatisée conçue pour l'ingestion quotidienne des flux partenaires chez MyBestSim.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
-        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-          <strong class="text-slate-900 block text-sm">1. Découverte CSV</strong>
-          <p class="text-slate-600">Scan automatique de <code class="font-mono text-blue-700">data/*.csv</code> (18 fichiers partenaires).</p>
-        </div>
-        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-          <strong class="text-slate-900 block text-sm">2. Nettoyage &amp; QA</strong>
-          <p class="text-slate-600">Validation des devises (EUR), détection des doublons SKU et isolation des forfaits illimités.</p>
-        </div>
-        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-          <strong class="text-slate-900 block text-sm">3. Calculs Vectorisés</strong>
-          <p class="text-slate-600">Agrégations Pandas et 7 tests unitaires automatisés validant tous les résultats.</p>
-        </div>
-        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-          <strong class="text-slate-900 block text-sm">4. Déploiement CI/CD</strong>
-          <p class="text-slate-600">Workflow GitHub Actions planifié chaque matin à 04:00 UTC pour mise à jour sans coupure.</p>
+      <!-- ── METHODOLOGICAL NOTE ───────────────────────────── -->
+      <div class="note-box">
+        <div class="flex items-start gap-4">
+          <div class="w-9 h-9 rounded-xl bg-blue-500/20 border border-blue-500/20 flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="flask-conical" class="w-4 h-4 text-blue-400"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-white text-sm mb-1">Rigueur Analytique — Question 4 : Moyenne de Data</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Lors de l'audit, <strong class="text-white">653 offres (12.91%)</strong> présentent une <strong class="text-white">Data Illimitée</strong>
+              (<code class="bg-white/8 px-1.5 py-0.5 rounded font-mono text-blue-300 text-[11px]">NaN</code> dans <code class="font-mono text-[11px] text-slate-300">data_gb</code>).
+              Injecter 999 Go arbitrairement aurait gonflé la moyenne à +140 Go. La valeur <strong class="text-white">14.49 Go</strong>
+              est rigoureusement calculée sur les <strong class="text-white">4 403 offres volumiques</strong>, avec la part illimitée isolée et quantifiée séparément.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
 
-  </main>
+      <!-- ── CHARTS SECTION ─────────────────────────────────── -->
+      <section id="charts-section">
+        <div class="flex items-center gap-2.5 mb-5">
+          <div class="w-8 h-8 rounded-xl bg-cyan-500/15 border border-cyan-500/20 flex items-center justify-center">
+            <i data-lucide="bar-chart-2" class="w-4 h-4 text-cyan-400"></i>
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-white">Analyses & Visualisations</h2>
+            <p class="text-xs text-slate-500">6 graphiques interactifs — survolez pour les détails</p>
+          </div>
+        </div>
 
-  <footer class="bg-white border-t border-slate-200 py-8 px-4 text-center text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <span class="w-6 h-6 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-xs">M</span>
-        <span class="font-bold text-slate-900">MyBestSim</span> — Test Technique Développeur IA &amp; Automatisation
+        <!-- Charts Grid -->
+        <div class="space-y-5">
+
+          <!-- Row 1: 2 big charts -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
+            <!-- Chart 1 -->
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h3 class="chart-title">6. Répartition par Fournisseur</h3>
+                  <p class="chart-subtitle">Volume de cartes eSIM répertoriées par marque partenaire</p>
+                </div>
+                <span class="chip chip-blue">18 Partenaires</span>
+              </div>
+              <div class="relative min-h-[360px]">
+                <canvas id="chartProviders"></canvas>
+              </div>
+            </div>
+
+            <!-- Chart 2 -->
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h3 class="chart-title">7. Benchmark Compétitivité au Go</h3>
+                  <p class="chart-subtitle">Du fournisseur le plus économique au plus onéreux (€/Go)</p>
+                </div>
+                <span class="chip chip-green">Moins cher : JamboSIM</span>
+              </div>
+              <div class="relative min-h-[360px]">
+                <canvas id="chartPricePerGb"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: 4 small charts -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h4 class="chart-title">Réseau 4G vs 5G</h4>
+                  <p class="chart-subtitle">+22% de surcoût moyen en 5G</p>
+                </div>
+              </div>
+              <div class="relative min-h-[200px]">
+                <canvas id="chartNetwork"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h4 class="chart-title">Rechargeabilité (Top-up)</h4>
+                  <p class="chart-subtitle">54.1% de cartes rechargeables</p>
+                </div>
+              </div>
+              <div class="relative min-h-[200px]">
+                <canvas id="chartTopUp"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h4 class="chart-title">Durée de Validité</h4>
+                  <p class="chart-subtitle">Volume & prix moyen par durée</p>
+                </div>
+              </div>
+              <div class="relative min-h-[200px]">
+                <canvas id="chartValidity"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <h4 class="chart-title">Histogramme des Prix</h4>
+                  <p class="chart-subtitle">Segmentation par tranche budgétaire</p>
+                </div>
+              </div>
+              <div class="relative min-h-[200px]">
+                <canvas id="chartPriceBuckets"></canvas>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CATALOG EXPLORER ──────────────────────────────── -->
+      <section id="explorer-section" class="bg-[#13161f] border border-white/5 rounded-3xl overflow-hidden">
+
+        <!-- Explorer Header -->
+        <div class="p-6 border-b border-white/5">
+          <div class="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2.5 mb-1">
+                <div class="w-7 h-7 rounded-lg bg-purple-500/15 border border-purple-500/20 flex items-center justify-center">
+                  <i data-lucide="table-2" class="w-3.5 h-3.5 text-purple-400"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white">Explorateur Interactif du Catalogue</h3>
+              </div>
+              <p class="text-xs text-slate-500 ml-9" id="tableFilteredCount">Initialisation des 5 056 offres...</p>
+            </div>
+
+            <div class="flex items-center gap-2 flex-wrap">
+              <button id="resetFiltersBtn" class="btn-secondary">
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Réinitialiser
+              </button>
+              <button id="exportCsvBtn" class="btn-primary">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i> Exporter CSV
+              </button>
+            </div>
+          </div>
+
+          <!-- Filter Row -->
+          <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+
+            <!-- Search -->
+            <div class="lg:col-span-2">
+              <label class="filter-label">Recherche globale</label>
+              <div class="relative">
+                <i data-lucide="search" class="w-4 h-4 text-slate-500 absolute left-3 top-2.5"></i>
+                <input type="text" id="searchInput" placeholder="Pays, fournisseur, SKU…" class="filter-input pl-9">
+              </div>
+            </div>
+
+            <!-- Provider -->
+            <div>
+              <label class="filter-label">Fournisseur</label>
+              <select id="filterProvider" class="filter-input">
+                <option value="all">Tous (18)</option>
+              </select>
+            </div>
+
+            <!-- Network -->
+            <div>
+              <label class="filter-label">Réseau</label>
+              <select id="filterNetwork" class="filter-input">
+                <option value="all">Tous réseaux</option>
+                <option value="5G">5G Uniquement</option>
+                <option value="4G">4G LTE</option>
+              </select>
+            </div>
+
+            <!-- Top-up -->
+            <div>
+              <label class="filter-label">Recharge</label>
+              <select id="filterTopup" class="filter-input">
+                <option value="all">Tous types</option>
+                <option value="oui">Rechargeable</option>
+                <option value="non">Usage unique</option>
+              </select>
+            </div>
+
+            <!-- Price slider -->
+            <div>
+              <div class="flex justify-between items-center filter-label mb-1.5">
+                <span>Prix max</span>
+                <span id="maxPriceVal" class="text-blue-400 font-bold text-xs">200 €</span>
+              </div>
+              <input type="range" id="filterMaxPrice" min="5" max="160" value="200" step="5"
+                class="w-full h-1.5 rounded-full appearance-none bg-white/10 accent-blue-500 cursor-pointer">
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="border-b border-white/5 bg-white/[0.02]">
+                <th class="table-th cursor-pointer hover:text-blue-400 transition" data-sort-col="sku">SKU ↕</th>
+                <th class="table-th cursor-pointer hover:text-blue-400 transition" data-sort-col="prov">Fournisseur ↕</th>
+                <th class="table-th cursor-pointer hover:text-blue-400 transition" data-sort-col="country">Destination ↕</th>
+                <th class="table-th cursor-pointer hover:text-blue-400 transition" data-sort-col="gb">Data ↕</th>
+                <th class="table-th cursor-pointer hover:text-blue-400 transition" data-sort-col="days">Validité ↕</th>
+                <th class="table-th cursor-pointer hover:text-blue-400 transition" data-sort-col="price">Prix (€) ↕</th>
+                <th class="table-th cursor-pointer hover:text-blue-400 transition" data-sort-col="net">Réseau ↕</th>
+                <th class="table-th cursor-pointer hover:text-blue-400 transition" data-sort-col="topup">Recharge ↕</th>
+              </tr>
+            </thead>
+            <tbody id="catalogTableBody" class="divide-y divide-white/[0.04]">
+              <!-- Dynamic rows injected by dashboard.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="p-4 border-t border-white/5 bg-white/[0.015] flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-2 text-xs text-slate-500">
+            <span>Lignes/page :</span>
+            <select id="pageSizeSelect" class="bg-[#1e2130] border border-white/8 rounded-lg px-2 py-1 text-slate-300 outline-none text-xs">
+              <option value="25" selected>25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <div id="paginationControls"></div>
+        </div>
+      </section>
+
+      <!-- ── PIPELINE ETL SECTION ──────────────────────────── -->
+      <section id="pipeline-section" class="bg-[#13161f] border border-white/5 rounded-3xl p-6 sm:p-8">
+        <div class="flex items-center gap-2.5 mb-6">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/20 flex items-center justify-center">
+            <i data-lucide="git-branch" class="w-4 h-4 text-emerald-400"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white">Pipeline d'Ingestion & Détection d'Anomalies</h3>
+            <p class="text-xs text-slate-500">Architecture ETL automatisée — GitHub Actions à 04:00 UTC</p>
+          </div>
+        </div>
+
+        <!-- Pipeline Steps -->
+        <div class="relative">
+          <!-- Connector line -->
+          <div class="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-blue-500/20 via-purple-500/30 to-emerald-500/20 z-0"></div>
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative z-10">
+
+            <div class="pipeline-step">
+              <div class="pipeline-icon bg-blue-500/15 border-blue-500/20 text-blue-400">
+                <i data-lucide="folder-open" class="w-5 h-5"></i>
+              </div>
+              <div class="pipeline-step-num text-blue-400">01</div>
+              <strong class="text-white text-sm block mt-2 mb-1">Découverte CSV</strong>
+              <p class="text-slate-500 text-xs leading-relaxed">Scan automatique de <code class="text-blue-300 font-mono">data/*.csv</code> — 18 fichiers partenaires détectés et validés.</p>
+              <div class="mt-3 flex gap-1 flex-wrap">
+                <span class="mini-tag">18 fichiers</span>
+                <span class="mini-tag">Python glob</span>
+              </div>
+            </div>
+
+            <div class="pipeline-step">
+              <div class="pipeline-icon bg-amber-500/15 border-amber-500/20 text-amber-400">
+                <i data-lucide="shield-check" class="w-5 h-5"></i>
+              </div>
+              <div class="pipeline-step-num text-amber-400">02</div>
+              <strong class="text-white text-sm block mt-2 mb-1">Nettoyage & QA</strong>
+              <p class="text-slate-500 text-xs leading-relaxed">Validation EUR, déduplication SKU, isolation des forfaits illimités (<code class="text-amber-300 font-mono">NaN → Illimité</code>).</p>
+              <div class="mt-3 flex gap-1 flex-wrap">
+                <span class="mini-tag">Pandas</span>
+                <span class="mini-tag">Dedup SKU</span>
+              </div>
+            </div>
+
+            <div class="pipeline-step">
+              <div class="pipeline-icon bg-purple-500/15 border-purple-500/20 text-purple-400">
+                <i data-lucide="cpu" class="w-5 h-5"></i>
+              </div>
+              <div class="pipeline-step-num text-purple-400">03</div>
+              <strong class="text-white text-sm block mt-2 mb-1">Calculs Vectorisés</strong>
+              <p class="text-slate-500 text-xs leading-relaxed">Agrégations Pandas et <strong class="text-white">7 tests unitaires</strong> automatisés — tous les KPIs validés.</p>
+              <div class="mt-3 flex gap-1 flex-wrap">
+                <span class="mini-tag">7/7 tests ✓</span>
+                <span class="mini-tag">NumPy</span>
+              </div>
+            </div>
+
+            <div class="pipeline-step">
+              <div class="pipeline-icon bg-emerald-500/15 border-emerald-500/20 text-emerald-400">
+                <i data-lucide="rocket" class="w-5 h-5"></i>
+              </div>
+              <div class="pipeline-step-num text-emerald-400">04</div>
+              <strong class="text-white text-sm block mt-2 mb-1">Déploiement CI/CD</strong>
+              <p class="text-slate-500 text-xs leading-relaxed">GitHub Actions planifié chaque matin — mise à jour sans coupure, dashboard rechargé automatiquement.</p>
+              <div class="mt-3 flex gap-1 flex-wrap">
+                <span class="mini-tag">GitHub Actions</span>
+                <span class="mini-tag">Vercel</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="mt-6 pt-6 border-t border-white/5">
+          <div class="text-xs text-slate-600 font-semibold uppercase tracking-widest mb-3">Stack Technique</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="tech-pill">🐍 Python 3.11</span>
+            <span class="tech-pill">🐼 Pandas</span>
+            <span class="tech-pill">📊 Chart.js</span>
+            <span class="tech-pill">⚡ Tailwind CSS</span>
+            <span class="tech-pill">🔄 GitHub Actions</span>
+            <span class="tech-pill">▲ Vercel</span>
+            <span class="tech-pill">🧪 pytest</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 py-6 px-6 text-center">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600">
+        <div class="flex items-center gap-2">
+          <div class="w-5 h-5 rounded bg-blue-600 text-white font-bold flex items-center justify-center text-[10px]">M</div>
+          <span class="font-semibold text-slate-500">MyBestSim</span>
+          <span>— Test Technique Développeur IA & Automatisation</span>
+        </div>
+        <div>
+          Réalisé par <strong class="text-slate-400">Mouaffak Chouaibi</strong>
+          · <a href="mailto:mouaffakch21@gmail.com" class="text-blue-500 hover:underline">mouaffakch21@gmail.com</a>
+          · <a href="https://github.com/Chouaibimouaffak" class="text-blue-500 hover:underline" target="_blank">GitHub</a>
+        </div>
       </div>
-      <div>
-        Réalisé par <strong>Mouaffak Chouaibi</strong> • Contact : mouaffakch21@gmail.com
-      </div>
-    </div>
-  </footer>
+    </footer>
+
+  </div><!-- /main wrapper -->
 
   <!-- Scripts: Precomputed datasets first to guarantee zero-CORS offline & online operation -->
   <script src="data/summary_stats.js"></script>
@@ -411,6 +619,32 @@
   <script src="js/dashboard.js"></script>
   <script>
     lucide.createIcons();
+
+    // Sidebar scroll spy
+    const sections = document.querySelectorAll('section[id], section[id]');
+    const links = document.querySelectorAll('.sidebar-link');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.sidebar-link[data-section="${e.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+
+    // Mobile sidebar toggle
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('mobileOverlay');
+      sidebar.classList.toggle('sidebar-open');
+      overlay.classList.toggle('hidden');
+    }
+
+    // Last updated
+    document.getElementById('lastUpdated').textContent =
+      new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
   </script>
 </body>
 </html>
