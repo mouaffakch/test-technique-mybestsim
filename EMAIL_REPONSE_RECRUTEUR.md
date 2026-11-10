@@ -98,7 +98,7 @@ Je reste à votre entière disposition pour vous présenter cette réalisation e
 Bien cordialement,
 
 **Mouaffak Chouaibi**  
-📞 +33 7 53 08 26 51 *(ou votre numéro de téléphone)*  
+📞 +33 7 53 08 26 51  
 ✉️ mouaffakch21@gmail.com  
 💼 [Profil GitHub : Chouaibimouaffak](https://github.com/Chouaibimouaffak)  
 🔗 [Repository GitHub du projet](https://github.com/Chouaibimouaffak/test-technique-mybestsim)
