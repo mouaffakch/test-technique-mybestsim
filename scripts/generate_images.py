@@ -1,0 +1,167 @@
+# Generate SVG infographics for cruise article
+schema_svg = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="100%" height="100%" style="background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); font-family: system-ui, -apple-system, sans-serif;">
+  <defs>
+    <linearGradient id="seaGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#0369a1" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="towerBeam" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0.0"/>
+    </linearGradient>
+  </defs>
+
+  <text x="480" y="40" text-anchor="middle" fill="#f8fafc" font-size="20" font-weight="800">Schéma Technique : Couverture Réseau en Croisière (Côte vs Haute Mer)</text>
+  <text x="480" y="65" text-anchor="middle" fill="#94a3b8" font-size="13">Comprendre la portée des antennes terrestres et la bascule satellite maritime</text>
+
+  <!-- Sky & Satellite -->
+  <g transform="translate(740, 90)">
+    <rect x="-25" y="-12" width="50" height="24" rx="4" fill="#64748b" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect x="-65" y="-8" width="35" height="16" rx="2" fill="#38bdf8" stroke="#0284c7"/>
+    <rect x="30" y="-8" width="35" height="16" rx="2" fill="#38bdf8" stroke="#0284c7"/>
+    <circle cx="0" cy="0" r="5" fill="#f8fafc"/>
+    <text x="0" y="32" text-anchor="middle" fill="#38bdf8" font-size="12" font-weight="700">Satellite Maritime (Cellular at Sea / Starlink)</text>
+  </g>
+
+  <!-- Satellite Beam -->
+  <polygon points="740,110 580,340 860,340" fill="url(#beamGrad)"/>
+
+  <!-- Sea -->
+  <rect x="0" y="280" width="960" height="200" fill="url(#seaGrad)"/>
+  <path d="M 0 300 Q 120 290, 240 300 T 480 300 T 720 300 T 960 300" stroke="#38bdf8" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M 0 340 Q 120 330, 240 340 T 480 340 T 720 340 T 960 340" stroke="#38bdf8" stroke-width="1" fill="none" opacity="0.2"/>
+
+  <!-- Land (Port / Coast) -->
+  <path d="M 0 200 Q 120 220, 180 280 L 180 480 L 0 480 Z" fill="#334155" stroke="#475569" stroke-width="2"/>
+  <text x="70" y="350" fill="#f1f5f9" font-size="16" font-weight="800">TERRE FERME</text>
+  <text x="70" y="375" fill="#94a3b8" font-size="12">Port &amp; Escales</text>
+
+  <!-- Cellular Tower on Land -->
+  <g transform="translate(140, 160)">
+    <line x1="0" y1="60" x2="-15" y2="120" stroke="#cbd5e1" stroke-width="2"/>
+    <line x1="0" y1="60" x2="15" y2="120" stroke="#cbd5e1" stroke-width="2"/>
+    <line x1="-10" y1="90" x2="10" y2="90" stroke="#cbd5e1" stroke-width="1.5"/>
+    <line x1="-5" y1="75" x2="5" y2="75" stroke="#cbd5e1" stroke-width="1.5"/>
+    <circle cx="0" cy="55" r="6" fill="#ef4444"/>
+    <path d="M 10 50 A 15 15 0 0 1 10 60" stroke="#10b981" stroke-width="2" fill="none"/>
+    <path d="M 18 45 A 25 25 0 0 1 18 65" stroke="#10b981" stroke-width="2" fill="none"/>
+    <path d="M 26 40 A 35 35 0 0 1 26 70" stroke="#10b981" stroke-width="2" fill="none"/>
+    <text x="-40" y="40" fill="#10b981" font-size="12" font-weight="700">Antenne 4G/5G Terrestre</text>
+  </g>
+
+  <!-- Terrestrial Signal Coverage Beam -->
+  <polygon points="140,215 480,260 480,360 140,230" fill="url(#towerBeam)"/>
+
+  <!-- Boundary line: 12 Nautical Miles -->
+  <line x1="480" y1="100" x2="480" y2="450" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6 6"/>
+  <rect x="410" y="110" width="140" height="44" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="480" y="128" text-anchor="middle" fill="#f59e0b" font-size="12" font-weight="800">12 MILLES NAUTIQUES</text>
+  <text x="480" y="144" text-anchor="middle" fill="#f8fafc" font-size="10">(~22,2 km - Limite UNCLOS)</text>
+
+  <!-- Cruise Ship -->
+  <g transform="translate(700, 275)">
+    <path d="M -60 25 L 70 25 L 85 45 L -75 45 Z" fill="#f8fafc" stroke="#0f172a" stroke-width="1.5"/>
+    <path d="M -75 45 L 85 45 L 75 55 L -65 55 Z" fill="#1e3a8a"/>
+    <rect x="-45" y="-5" width="95" height="30" fill="#f1f5f9" rx="2" stroke="#cbd5e1" stroke-width="1"/>
+    <rect x="-30" y="-20" width="65" height="15" fill="#f8fafc" rx="2" stroke="#cbd5e1" stroke-width="1"/>
+    <path d="M -5 -35 L 15 -35 L 10 -20 L -10 -20 Z" fill="#ef4444"/>
+    <rect x="-5" y="-35" width="20" height="4" fill="#1e293b"/>
+    <circle cx="-25" cy="10" r="2.5" fill="#0284c7"/>
+    <circle cx="-10" cy="10" r="2.5" fill="#0284c7"/>
+    <circle cx="5" cy="10" r="2.5" fill="#0284c7"/>
+    <circle cx="20" cy="10" r="2.5" fill="#0284c7"/>
+    <circle cx="35" cy="10" r="2.5" fill="#0284c7"/>
+    <circle cx="50" cy="10" r="2.5" fill="#0284c7"/>
+    <text x="5" y="80" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="700">Paquebot en Haute Mer</text>
+  </g>
+
+  <!-- Bottom Explanatory Badges -->
+  <rect x="60" y="410" width="360" height="55" rx="10" fill="#064e3b" stroke="#10b981" stroke-width="1.5" opacity="0.95"/>
+  <text x="80" y="432" fill="#34d399" font-size="12" font-weight="800">✓ ZONE ESCALES (0 à 12 milles) :</text>
+  <text x="80" y="450" fill="#ecfdf5" font-size="11">eSIM Régionale 4G/5G active (Roamic, Yesim, Airalo dès 7,50 €)</text>
+
+  <rect x="540" y="410" width="360" height="55" rx="10" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.5" opacity="0.95"/>
+  <text x="560" y="432" fill="#a5b4fc" font-size="12" font-weight="800">⚡ ZONE HAUTE MER (Au-delà de 12 milles) :</text>
+  <text x="560" y="450" fill="#e0e7ff" font-size="11">Mode Avion conseillé (ou eSIM GigSky Cruise / Wi-Fi paquebot)</text>
+</svg>"""
+
+with open("partie-2-article-seo/images/schema-12-milles-reseau-croisiere.svg", "w", encoding="utf-8") as f:
+    f.write(schema_svg)
+
+map_svg = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="100%" height="100%" style="background: linear-gradient(135deg, #091e3a 0%, #112a45 100%); font-family: system-ui, -apple-system, sans-serif;">
+  <text x="480" y="40" text-anchor="middle" fill="#f8fafc" font-size="20" font-weight="800">Carte des Itinéraires de Croisière &amp; Stratégie eSIM 2026</text>
+  <text x="480" y="65" text-anchor="middle" fill="#93c5fd" font-size="13">Méditerranée vs Caraïbes : quelle couverture choisir à chaque escale ?</text>
+
+  <!-- Left Card: Mediterranée -->
+  <g transform="translate(50, 95)">
+    <rect width="410" height="350" rx="16" fill="#0f172a" stroke="#1e40af" stroke-width="1.5"/>
+    <rect width="410" height="42" rx="16" fill="#1e3a8a"/>
+    <rect y="26" width="410" height="16" fill="#1e3a8a"/>
+    <text x="20" y="27" fill="#93c5fd" font-size="14" font-weight="800">🌊 Croisière Méditerranée (Europe de l'Ouest &amp; Adriatique)</text>
+    
+    <g transform="translate(30, 70)">
+      <circle cx="15" cy="20" r="8" fill="#10b981"/>
+      <text x="35" y="24" fill="#f8fafc" font-size="13" font-weight="700">Barcelone (Espagne) <tspan fill="#34d399" font-size="11">• 4G/5G Roamic / Yesim</tspan></text>
+      
+      <line x1="15" y1="28" x2="15" y2="62" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4 4"/>
+      
+      <circle cx="15" cy="70" r="8" fill="#10b981"/>
+      <text x="35" y="74" fill="#f8fafc" font-size="13" font-weight="700">Marseille (France) <tspan fill="#34d399" font-size="11">• Réseau national ou eSIM</tspan></text>
+      
+      <line x1="15" y1="78" x2="15" y2="112" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4 4"/>
+      
+      <circle cx="15" cy="120" r="8" fill="#10b981"/>
+      <text x="35" y="124" fill="#f8fafc" font-size="13" font-weight="700">Gênes / Rome (Italie) <tspan fill="#34d399" font-size="11">• 4G/5G Roamic / Airalo</tspan></text>
+
+      <line x1="15" y1="128" x2="15" y2="162" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4 4"/>
+      
+      <circle cx="15" cy="170" r="8" fill="#10b981"/>
+      <text x="35" y="174" fill="#f8fafc" font-size="13" font-weight="700">Palma de Majorque (Baléares) <tspan fill="#34d399" font-size="11">• 4G/5G Escales</tspan></text>
+    </g>
+
+    <rect x="20" y="270" width="370" height="62" rx="10" fill="#1e293b" stroke="#334155"/>
+    <text x="35" y="293" fill="#38bdf8" font-size="12" font-weight="700">Recommandation Méditerranée :</text>
+    <text x="35" y="313" fill="#cbd5e1" font-size="11">Une seule eSIM Régionale Europe (1 à 10 Go dès 7,50 €)</text>
+  </g>
+
+  <!-- Right Card: Caraibes -->
+  <g transform="translate(500, 95)">
+    <rect width="410" height="350" rx="16" fill="#0f172a" stroke="#065f46" stroke-width="1.5"/>
+    <rect width="410" height="42" rx="16" fill="#064e3b"/>
+    <rect y="26" width="410" height="16" fill="#064e3b"/>
+    <text x="20" y="27" fill="#6ee7b7" font-size="14" font-weight="800">🌴 Croisière Caraïbes &amp; Bahamas (Multi-Îles)</text>
+    
+    <g transform="translate(30, 70)">
+      <circle cx="15" cy="20" r="8" fill="#38bdf8"/>
+      <text x="35" y="24" fill="#f8fafc" font-size="13" font-weight="700">Miami (USA - Embarquement) <tspan fill="#7dd3fc" font-size="11">• Réseau US</tspan></text>
+      
+      <line x1="15" y1="28" x2="15" y2="62" stroke="#34d399" stroke-width="2" stroke-dasharray="4 4"/>
+      
+      <circle cx="15" cy="70" r="8" fill="#38bdf8"/>
+      <text x="35" y="74" fill="#f8fafc" font-size="13" font-weight="700">Nassau (Bahamas) <tspan fill="#7dd3fc" font-size="11">• Forfait Caraïbes</tspan></text>
+      
+      <line x1="15" y1="78" x2="15" y2="112" stroke="#34d399" stroke-width="2" stroke-dasharray="4 4"/>
+      
+      <circle cx="15" cy="120" r="8" fill="#38bdf8"/>
+      <text x="35" y="124" fill="#f8fafc" font-size="13" font-weight="700">Cozumel (Mexique) <tspan fill="#7dd3fc" font-size="11">• Forfait Caraïbes / Amérique</tspan></text>
+
+      <line x1="15" y1="128" x2="15" y2="162" stroke="#34d399" stroke-width="2" stroke-dasharray="4 4"/>
+      
+      <circle cx="15" cy="170" r="8" fill="#38bdf8"/>
+      <text x="35" y="174" fill="#f8fafc" font-size="13" font-weight="700">Philipsburg (Sint Maarten) <tspan fill="#7dd3fc" font-size="11">• Antilles</tspan></text>
+    </g>
+
+    <rect x="20" y="270" width="370" height="62" rx="10" fill="#1e293b" stroke="#334155"/>
+    <text x="35" y="293" fill="#34d399" font-size="12" font-weight="700">Recommandation Caraïbes :</text>
+    <text x="35" y="313" fill="#cbd5e1" font-size="11">eSIM Régionale Caraïbes (Island Hopper / GigSky dès 9 €)</text>
+  </g>
+</svg>"""
+
+with open("partie-2-article-seo/images/carte-itineraires-escales-croisiere-esim.svg", "w", encoding="utf-8") as f:
+    f.write(map_svg)
+
+print("SVG files successfully generated.")

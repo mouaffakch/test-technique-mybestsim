@@ -22,7 +22,7 @@ Conformément à vos consignes, les deux livrables ont été déployés de mani�
 
 - **Livrable 2 — Article SEO « Internet en croisière : quelle eSIM choisir ? » :**  
   👉 **`https://mybestsim-article-mouaffak.netlify.app/`**  
-  *(Article de fond de 3 164 mots, comparatif haute mer vs escales, 4 suggestions d'images éditoriales avec prompts, simulateur interactif, et balisage Schema.org Article + FAQPage).*
+  *(Article de fond approfondi de 3 445 mots, comparatif haute mer vs escales, 4 visuels réels et infographies vectorielles SVG, simulateur interactif en temps réel, sources officielles UE / GigSky, et balisage Schema.org Article + FAQPage).*
 
 - **Code Source Complet (Repository GitHub) :**  
   👉 **https://github.com/Chouaibimouaffak/test-technique-mybestsim**  
@@ -74,11 +74,12 @@ Conformément à la consigne d'analyser la concurrence pour définir la longueur
 5. **MyBestSim (vos articles existants sur croisière et Caraïbes)** : ~1 500 à 1 900 mots.
 
 #### Justification de nos choix éditoriaux :
-- **Longueur cible (3 164 mots) :** Pour surclasser les concurrents français tout en rivalisant avec Simology sur le plan de l'autorité thématique, un format approfondi de ~3 000 mots est idéal pour capter la position 0 sur les requêtes informationnelles et transactionnelles.
+- **Longueur cible (3 445 mots) :** Pour surclasser les concurrents français tout en rivalisant directement avec Simology (3 400 mots) sur le plan de l'autorité thématique, un format approfondi de ~3 400 mots est idéal pour capter la position 0 sur les requêtes informationnelles et transactionnelles.
 - **Cohérence stricte avec les données CSV :** Les tarifs cités dans l'article pour Roamic, Yesim et Airalo reprennent scrupuleusement les chiffres réels du catalogue (ex : Roamic Europe 1 Go à 10,68 €, 3 Go à 18,96 €, 10 Go à 25,63 € ; Yesim Europe 5 Go à 20,69 € ; Airalo Europe 1 Go 7j à 7,53 € et 3 Go 7j à 14,25 €).
 - **Rigueur sur les offres & codes promo officiels :** Aucun code inventé : intégration du vrai code de remise partenaire `MYBESTSIM` (-5 % de réduction) et lien direct vers votre répertoire officiel `mybestsim.com/codes-promo`.
-- **Transparence sur les forfaits maritimes :** Le catalogue CSV fourni ne contenant aucun forfait maritime dédié, j'ai explicitement indiqué que l'offre *GigSky Cruise* est une solution externe spécialisée (sourcée sur le portail officiel de l'opérateur).
-- **Suggestions d'images prêtes à l'emploi :** 4 emplacements éditoriaux intégrés (Bannière d'en-tête, Schéma des 12 milles marins UNCLOS, Photo d'escale méditerranéenne et Carte stylisée des escales Caraïbes), avec balises `<img>` optimisées et prompts IA de génération.
+- **Transparence sur les forfaits maritimes & dates :** Le catalogue CSV fourni ne contenant aucun forfait maritime dédié, j'ai explicitement indiqué que l'offre *GigSky Cruise* est une solution externe spécialisée (sourcée sur le portail officiel de l'opérateur). Tous les tarifs sont explicitement datés de Novembre 2026.
+- **Intégration d'images réelles & infographies SVG :** 4 visuels réels intégrés dans l'article (Photographie HD de paquebot en mer Méditerranée, Schéma vectoriel SVG des 12 milles et de la bascule satellite, Photo de navire en escale, et Carte stylisée SVG des itinéraires Caraïbes & Méditerranée), avec textes alternatifs complets.
+- **Rigueur technique & sources officielles :** Références actives vers la Commission européenne (*Shaping Europe’s digital future* pour le roaming), GigSky pour la couverture satellite maritime, et l'UNCLOS pour les 12 milles, avec clarification technique sur la portée réelle des fréquences radio et le blindage des cabines.
 - **SEO Technique :** Balisage Schema.org JSON-LD complet (`Article` + `FAQPage` à 6 questions + `BreadcrumbList`), meta-description optimisée à 154 caractères et hiérarchie sémantique H2/H3 rigoureuse.
 
 ---

@@ -9,15 +9,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initCruiseSimulator() {
   const btn = document.getElementById("simCalculateBtn");
-  if (!btn) return;
+  const destSelect = document.getElementById("simDest");
+  const seaNeedSelect = document.getElementById("simSeaNeed");
+  const durationSelect = document.getElementById("simDuration");
+  const resultBox = document.getElementById("simResult");
 
-  btn.addEventListener("click", () => {
-    const dest = document.getElementById("simDest")?.value || "med";
-    const seaNeed = document.getElementById("simSeaNeed")?.value || "no";
-    const duration = document.getElementById("simDuration")?.value || "7";
-    const resultBox = document.getElementById("simResult");
+  if (!resultBox) return;
 
-    if (!resultBox) return;
+  function calculate() {
+    const dest = destSelect?.value || "med";
+    const seaNeed = seaNeedSelect?.value || "no";
+    const duration = durationSelect?.value || "7";
 
     let recTitle = "";
     let recBadge = "";
@@ -29,10 +31,10 @@ function initCruiseSimulator() {
     if (seaNeed === "yes") {
       recTitle = "Formule Hybride Haute Mer & Escales (Liaison Satellite)";
       recBadge = "Connecté Partout (Haute Mer + Ports)";
-      recProvider = "GigSky Cruise + Land";
-      recPrice = duration === "7" ? "Dès 18,49 € (512 Mo) · ~35 € à 45 € (1-3 Go)" : "Env. 50 € à 75 €";
-      recDesc = "Recommandé si vous devez impérativement recevoir vos e-mails professionnels ou rester joignable 24h/24 en pleine navigation. L'eSIM fonctionne sur les relais satellites embarqués (Cellular at Sea / WMS de +200 paquebots) ET bascule automatiquement en 4G/5G dès que vous approchez des côtes.";
-      warning = "Formule prépayée sans risque de hors-forfait. Beaucoup plus économique que le Wi-Fi paquebot vendu à 20-30 €/jour par personne, et 100x moins cher que le roaming maritime sauvage de votre opérateur classique !";
+      recProvider = "GigSky Cruise + Land (Solution Externe)";
+      recPrice = duration === "7" ? "Dès env. 18,49 € (512 Mo) · ~35 € à 50 € (1-3 Go)" : "Env. 50 € à 75 €";
+      recDesc = "Recommandé si vous devez impérativement recevoir vos e-mails professionnels ou rester joignable 24h/24 en pleine navigation. L'eSIM fonctionne sur les relais satellites embarqués de nombreux navires partenaires ET bascule automatiquement en 4G/5G terrestre dès que vous approchez des côtes.";
+      warning = "Configuration requise : ne mettez pas votre téléphone en mode avion complet ! Désactivez uniquement l'itinérance sur votre SIM française principale, et activez les données sur votre eSIM GigSky.";
     } else {
       recTitle = "Formule Escales Malin & Économique (Top Recommandation)";
       recBadge = "100% Escales 4G/5G Sans Stress";
@@ -85,5 +87,18 @@ function initCruiseSimulator() {
       </div>
     `;
     resultBox.classList.remove("hidden");
-  });
+
+    if (window.lucide && typeof window.lucide.createIcons === "function") {
+      window.lucide.createIcons();
+    }
+  }
+
+  // Bind click & change events
+  if (btn) btn.addEventListener("click", calculate);
+  if (destSelect) destSelect.addEventListener("change", calculate);
+  if (seaNeedSelect) seaNeedSelect.addEventListener("change", calculate);
+  if (durationSelect) durationSelect.addEventListener("change", calculate);
+
+  // Initialize immediately on load
+  calculate();
 }

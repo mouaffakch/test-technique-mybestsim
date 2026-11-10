@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="100%" height="100%" style="background: linear-gradient(135deg, #091e3a 0%, #112a45 100%); font-family: system-ui, -apple-system, sans-serif;">
+  <text x="480" y="40" text-anchor="middle" fill="#f8fafc" font-size="20" font-weight="800">Carte des Itinéraires de Croisière &amp; Stratégie eSIM 2026</text>
+  <text x="480" y="65" text-anchor="middle" fill="#93c5fd" font-size="13">Méditerranée vs Caraïbes : quelle couverture choisir à chaque escale ?</text>
+
+  <!-- Left Card: Mediterranée -->
+  <g transform="translate(50, 95)">
+    <rect width="410" height="350" rx="16" fill="#0f172a" stroke="#1e40af" stroke-width="1.5"/>
+    <rect width="410" height="42" rx="16" fill="#1e3a8a"/>
+    <rect y="26" width="410" height="16" fill="#1e3a8a"/>
+    <text x="20" y="27" fill="#93c5fd" font-size="14" font-weight="800">🌊 Croisière Méditerranée (Europe de l'Ouest &amp; Adriatique)</text>
+    
+    <g transform="translate(30, 70)">
+      <circle cx="15" cy="20" r="8" fill="#10b981"/>
+      <text x="35" y="24" fill="#f8fafc" font-size="13" font-weight="700">Barcelone (Espagne) <tspan fill="#34d399" font-size="11">• 4G/5G Roamic / Yesim</tspan></text>
+      
+      <line x1="15" y1="28" x2="15" y2="62" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4 4"/>
+      
+      <circle cx="15" cy="70" r="8" fill="#10b981"/>
+      <text x="35" y="74" fill="#f8fafc" font-size="13" font-weight="700">Marseille (France) <tspan fill="#34d399" font-size="11">• Réseau national ou eSIM</tspan></text>
+      
+      <line x1="15" y1="78" x2="15" y2="112" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4 4"/>
+      
+      <circle cx="15" cy="120" r="8" fill="#10b981"/>
+      <text x="35" y="124" fill="#f8fafc" font-size="13" font-weight="700">Gênes / Rome (Italie) <tspan fill="#34d399" font-size="11">• 4G/5G Roamic / Airalo</tspan></text>
+
+      <line x1="15" y1="128" x2="15" y2="162" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4 4"/>
+      
+      <circle cx="15" cy="170" r="8" fill="#10b981"/>
+      <text x="35" y="174" fill="#f8fafc" font-size="13" font-weight="700">Palma de Majorque (Baléares) <tspan fill="#34d399" font-size="11">• 4G/5G Escales</tspan></text>
+    </g>
+
+    <rect x="20" y="270" width="370" height="62" rx="10" fill="#1e293b" stroke="#334155"/>
+    <text x="35" y="293" fill="#38bdf8" font-size="12" font-weight="700">Recommandation Méditerranée :</text>
+    <text x="35" y="313" fill="#cbd5e1" font-size="11">Une seule eSIM Régionale Europe (1 à 10 Go dès 7,50 €)</text>
+  </g>
+
+  <!-- Right Card: Caraibes -->
+  <g transform="translate(500, 95)">
+    <rect width="410" height="350" rx="16" fill="#0f172a" stroke="#065f46" stroke-width="1.5"/>
+    <rect width="410" height="42" rx="16" fill="#064e3b"/>
+    <rect y="26" width="410" height="16" fill="#064e3b"/>
+    <text x="20" y="27" fill="#6ee7b7" font-size="14" font-weight="800">🌴 Croisière Caraïbes &amp; Bahamas (Multi-Îles)</text>
+    
+    <g transform="translate(30, 70)">
+      <circle cx="15" cy="20" r="8" fill="#38bdf8"/>
+      <text x="35" y="24" fill="#f8fafc" font-size="13" font-weight="700">Miami (USA - Embarquement) <tspan fill="#7dd3fc" font-size="11">• Réseau US</tspan></text>
+      
+      <line x1="15" y1="28" x2="15" y2="62" stroke="#34d399" stroke-width="2" stroke-dasharray="4 4"/>
+      
+      <circle cx="15" cy="70" r="8" fill="#38bdf8"/>
+      <text x="35" y="74" fill="#f8fafc" font-size="13" font-weight="700">Nassau (Bahamas) <tspan fill="#7dd3fc" font-size="11">• Forfait Caraïbes</tspan></text>
+      
+      <line x1="15" y1="78" x2="15" y2="112" stroke="#34d399" stroke-width="2" stroke-dasharray="4 4"/>
+      
+      <circle cx="15" cy="120" r="8" fill="#38bdf8"/>
+      <text x="35" y="124" fill="#f8fafc" font-size="13" font-weight="700">Cozumel (Mexique) <tspan fill="#7dd3fc" font-size="11">• Forfait Caraïbes / Amérique</tspan></text>
+
+      <line x1="15" y1="128" x2="15" y2="162" stroke="#34d399" stroke-width="2" stroke-dasharray="4 4"/>
+      
+      <circle cx="15" cy="170" r="8" fill="#38bdf8"/>
+      <text x="35" y="174" fill="#f8fafc" font-size="13" font-weight="700">Philipsburg (Sint Maarten) <tspan fill="#7dd3fc" font-size="11">• Antilles</tspan></text>
+    </g>
+
+    <rect x="20" y="270" width="370" height="62" rx="10" fill="#1e293b" stroke="#334155"/>
+    <text x="35" y="293" fill="#34d399" font-size="12" font-weight="700">Recommandation Caraïbes :</text>
+    <text x="35" y="313" fill="#cbd5e1" font-size="11">eSIM Régionale Caraïbes (Island Hopper / GigSky dès 9 €)</text>
+  </g>
+</svg>
