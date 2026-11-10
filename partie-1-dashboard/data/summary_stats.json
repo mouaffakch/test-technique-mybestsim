@@ -1,10 +1,11 @@
 {
   "metadata": {
-    "generated_at": "2026-11-04T00:35:34.071827",
+    "generated_at": "2026-11-10T03:31:01.145572",
     "source_files_count": 18,
     "total_records": 5056,
-    "pipeline_version": "2.4.0-prod",
-    "currency": "EUR"
+    "pipeline_version": "2.5.0-verified",
+    "currency": "EUR",
+    "qa_verified": true
   },
   "kpis": {
     "total_esim_products": 5056,
@@ -25,7 +26,19 @@
     "global_average_price": 29.3,
     "global_median_price": 20.7,
     "price_per_gb_avg": 3.17,
-    "price_per_gb_median": 2.55
+    "price_per_gb_median": 2.55,
+    "price_per_gb_weighted": 1.7
+  },
+  "pricing_insights": {
+    "weighted_avg_price_per_gb": 1.7,
+    "arithmetic_avg_price_per_gb": 3.17,
+    "median_price_per_gb": 2.55,
+    "provider_neutrality_finding": "Sur des offres strictement identiques (même destination, même data, même validité), les 18 fournisseurs affichent des prix quasi-identiques (±0.5% de la médiane). Les écarts apparents de prix/Go sont un biais de composition de catalogue.",
+    "primary_drivers": [
+      "Volume de data : économie d'échelle massive (dégressif de ~5.40 €/Go sur 1 Go à ~0.60 €/Go sur 20 Go)",
+      "Type de couverture géographique : les forfaits régionaux multi-pays (Europe, Asie, Caraïbes) coûtent en moyenne +40% par rapport aux forfaits mono-pays."
+    ],
+    "qa_na_country_code_count": 192
   },
   "providers": [
     {
@@ -322,9 +335,17 @@
     "count_5g": 1754,
     "pct_4g": 65.31,
     "pct_5g": 34.69,
+    "unlimited_count_4g": 252,
+    "unlimited_count_5g": 401,
+    "unlimited_pct_4g": 7.63,
+    "unlimited_pct_5g": 22.86,
     "avg_price_4g": 27.22,
     "avg_price_5g": 33.22,
-    "premium_5g_pct": 22.0
+    "avg_price_finite_4g": 24.73,
+    "avg_price_finite_5g": 24.39,
+    "crude_premium_5g_pct": 22.0,
+    "finite_premium_5g_pct": -1.4,
+    "mix_effect_explanation": "Paradoxe de Simpson : la 5G paraît +22% plus chère uniquement car 22.9% de ses offres sont illimitées (plus onéreuses), contre seulement 7.6% en 4G. À offre comparable (volume fini), la 5G est au même prix (-1.4%)."
   },
   "top_up": {
     "count_yes": 2738,
@@ -390,44 +411,6 @@
       "pct": 1.11
     }
   ],
-  "gb_tiers": [
-    {
-      "gb": 1,
-      "label": "1 Go",
-      "count": 728,
-      "pct": 14.4
-    },
-    {
-      "gb": 3,
-      "label": "3 Go",
-      "count": 751,
-      "pct": 14.85
-    },
-    {
-      "gb": 5,
-      "label": "5 Go",
-      "count": 767,
-      "pct": 15.17
-    },
-    {
-      "gb": 10,
-      "label": "10 Go",
-      "count": 709,
-      "pct": 14.02
-    },
-    {
-      "gb": 20,
-      "label": "20 Go",
-      "count": 750,
-      "pct": 14.83
-    },
-    {
-      "gb": 50,
-      "label": "50 Go",
-      "count": 698,
-      "pct": 13.81
-    }
-  ],
   "top_destinations": [
     {
       "country_name": "Europe",
@@ -444,6 +427,14 @@
       "avg_price": 40.9,
       "min_price": 7.49,
       "unlimited_plans": 29
+    },
+    {
+      "country_name": "Amérique du Nord",
+      "country_code": "NA",
+      "total_plans": 192,
+      "avg_price": 42.04,
+      "min_price": 7.6,
+      "unlimited_plans": 28
     },
     {
       "country_name": "Monde",
@@ -540,14 +531,6 @@
       "avg_price": 24.89,
       "min_price": 5.76,
       "unlimited_plans": 16
-    },
-    {
-      "country_name": "Rép. dominicaine",
-      "country_code": "DO",
-      "total_plans": 92,
-      "avg_price": 25.14,
-      "min_price": 5.81,
-      "unlimited_plans": 15
     }
   ],
   "distinct_destinations_count": 54

@@ -1,5 +1,6 @@
 /**
  * Interactive Script for MyBestSim Cruise SEO Article
+ * Handles the Cruise Recommendation Simulator with realistic market pricing.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -26,39 +27,61 @@ function initCruiseSimulator() {
     let warning = "";
 
     if (seaNeed === "yes") {
-      recTitle = "Formule Haute Mer & Escales Hybride";
-      recBadge = "Connexion Partout (Au Large + Terre)";
+      recTitle = "Formule Hybride Haute Mer & Escales (Liaison Satellite)";
+      recBadge = "Connecté Partout (Haute Mer + Ports)";
       recProvider = "GigSky Cruise + Land";
-      recPrice = duration === "7" ? "Env. 35 € - 45 €" : "Env. 60 € - 85 €";
-      recDesc = "Idéal si vous devez impérativement recevoir vos e-mails professionnels ou rester en contact avec vos proches pendant la navigation en haute mer. Fonctionne sur le réseau satellite maritime (WMS / Cellular at Sea de +200 navires) ET sur les antennes 4G/5G des ports d'escale.";
-      warning = "Bien plus avantageux que le Wi-Fi paquebot vendu à 20-30 €/jour par personne, et 100x moins cher que le roaming maritime sauvage de votre opérateur classique !";
+      recPrice = duration === "7" ? "Dès 18,49 € (512 Mo) · ~35 € à 45 € (1-3 Go)" : "Env. 50 € à 75 €";
+      recDesc = "Recommandé si vous devez impérativement recevoir vos e-mails professionnels ou rester joignable 24h/24 en pleine navigation. L'eSIM fonctionne sur les relais satellites embarqués (Cellular at Sea / WMS de +200 paquebots) ET bascule automatiquement en 4G/5G dès que vous approchez des côtes.";
+      warning = "Formule prépayée sans risque de hors-forfait. Beaucoup plus économique que le Wi-Fi paquebot vendu à 20-30 €/jour par personne, et 100x moins cher que le roaming maritime sauvage de votre opérateur classique !";
     } else {
       recTitle = "Formule Escales Malin & Économique (Top Recommandation)";
       recBadge = "100% Escales 4G/5G Sans Stress";
-      recProvider = dest === "caraibes" ? "Airalo / Saily (Pack Caraïbes)" : "Airalo Eurolink / Saily Europe";
-      recPrice = duration === "7" ? "Env. 7 € - 14 €" : "Env. 15 € - 24 €";
-      recDesc = "La stratégie des croisiéristes avertis ! Vous profitez d'une 4G/5G ultra-rapide dès que le bateau approche des côtes et durant toutes vos excursions au port. En mer, mettez votre téléphone en mode avion et profitez des spectacles, piscines et de la déconnexion.";
-      warning = "Pensez à désactiver l'itinérance sur votre SIM française dès que le navire quitte le quai pour bloquer tout piratage maritime !";
+      
+      if (dest === "caraibes") {
+        recProvider = "Airalo Island Hopper / GigSky Caraïbes";
+        recPrice = duration === "7" ? "Env. 9 € - 15 €" : "Env. 18 € - 28 €";
+        recDesc = "La solution idéale pour les croisières dans les Antilles et Caraïbes ! Une seule eSIM couvre toutes les îles de votre itinéraire (Bahamas, Sint Maarten, Mexique, Jamaïque) en haut débit sans changer de carte SIM à chaque port.";
+      } else if (dest === "monde") {
+        recProvider = "Roamic Global / Yesim Monde / Airalo Discover";
+        recPrice = duration === "7" ? "Env. 12 € - 20 €" : "Env. 25 € - 45 €";
+        recDesc = "Couverture universelle sur 130+ pays. Idéal pour les grands voyages, transatlantiques et escales diversifiées hors d'Europe.";
+      } else {
+        recProvider = "Roamic Europe / Yesim Europe / Airalo Eurolink";
+        recPrice = duration === "7" ? "Env. 5 € - 12 €" : "Env. 12 € - 22 €";
+        recDesc = "La stratégie favorite des croisiéristes en Méditerranée ! Vous profitez d'une 4G/5G ultra-rapide dès que le bateau approche des côtes et durant toutes vos excursions au port. En mer, mettez votre téléphone en mode avion pour vous déconnecter et préserver votre batterie.";
+      }
+      
+      warning = "Pensez à passer votre SIM principale en mode avion dès que le navire largue les amarres pour bloquer toute connexion aux antennes satellites non régulées !";
     }
 
     resultBox.innerHTML = `
-      <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl shadow-sm">
-        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+      <div class="p-6 bg-white text-slate-800 rounded-2xl shadow-lg border border-slate-200 mt-4 animate-fade-in space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
           <span class="inline-block px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full">${recBadge}</span>
-          <span class="text-sm font-semibold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">${recPrice}</span>
+          <span class="text-xs sm:text-sm font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">${recPrice}</span>
         </div>
-        <h4 class="text-xl font-bold text-slate-900 mb-2">${recTitle}</h4>
-        <div class="text-blue-900 font-semibold mb-3 flex items-center gap-2">
-          <span>Opérateur recommandé :</span> 
-          <span class="underline decoration-blue-500 font-bold text-blue-700">${recProvider}</span>
+        
+        <h4 class="text-lg font-black text-slate-900">${recTitle}</h4>
+        
+        <div class="text-xs text-slate-600">
+          <span class="font-bold text-slate-900">Fournisseur(s) recommandé(s) :</span> 
+          <span class="font-bold text-blue-600 underline">${recProvider}</span>
         </div>
-        <p class="text-slate-700 text-sm mb-4 leading-relaxed">${recDesc}</p>
-        <div class="p-3 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg text-amber-900 text-xs mb-4">
+        
+        <p class="text-xs text-slate-600 leading-relaxed">${recDesc}</p>
+        
+        <div class="p-3 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl text-amber-900 text-xs">
           <strong>Astuce MyBestSim :</strong> ${warning}
         </div>
-        <a href="https://mybestsim.com" target="_blank" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl shadow transition-all">
-          Voir les meilleures offres sur MyBestSim.com
-        </a>
+        
+        <div class="pt-2 flex flex-wrap gap-2">
+          <a href="https://mybestsim.com" target="_blank" class="inline-flex items-center justify-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow transition">
+            Comparer les offres sur MyBestSim.com →
+          </a>
+          <a href="https://mybestsim.com/codes-promo" target="_blank" class="inline-flex items-center justify-center px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition">
+            Voir les codes promo officiels
+          </a>
+        </div>
       </div>
     `;
     resultBox.classList.remove("hidden");

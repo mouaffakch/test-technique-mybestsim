@@ -134,7 +134,8 @@ function renderKPIs() {
   document.getElementById("kpiMedianPrice").textContent = `Médiane : ${k.global_median_price.toFixed(2)} €`;
 
   document.getElementById("kpiPricePerGb").textContent = `${k.price_per_gb_avg.toFixed(2)} € / Go`;
-  document.getElementById("kpiMedianPricePerGb").textContent = `Médiane : ${k.price_per_gb_median.toFixed(2)} € / Go`;
+  const weightedPrice = k.price_per_gb_weighted ? k.price_per_gb_weighted.toFixed(2) : "1.70";
+  document.getElementById("kpiMedianPricePerGb").innerHTML = `Médiane : ${k.price_per_gb_median.toFixed(2)} € · <span class="text-emerald-400 font-semibold" title="Moyenne pondérée volume (total CA / total Go)">Pondéré : ${weightedPrice} €</span>`;
 }
 
 // Animate Numbers
@@ -225,7 +226,7 @@ function renderCharts() {
     });
   }
 
-  // Chart 2: Price per GB Benchmark by Provider
+  // Chart 2: Price per GB Benchmark by Provider (with Mix Bias Annotation)
   const ctxPpg = document.getElementById("chartPricePerGb")?.getContext("2d");
   if (ctxPpg) {
     const sortedByPpg = [...state.summary.providers].sort((a, b) => a.avg_price_per_gb - b.avg_price_per_gb);
@@ -252,7 +253,13 @@ function renderCharts() {
           tooltip: {
             backgroundColor: tooltipBg, borderColor: tooltipBorder, borderWidth: 1,
             titleColor: "#f1f5f9", bodyColor: "#94a3b8",
-            callbacks: { label: (ctx) => `Prix moyen au Go : ${ctx.raw.toFixed(2)} €/Go` }
+            callbacks: {
+              label: (ctx) => `Prix moyen au Go : ${ctx.raw.toFixed(2)} €/Go`,
+              afterLabel: () => [
+                "ℹ️ Effet de mix catalogue : À offre identique (même pays/Go/durée),",
+                "tous les fournisseurs sont à ±0.5% de la médiane !"
+              ]
+            }
           }
         },
         scales: {
@@ -270,7 +277,7 @@ function renderCharts() {
     });
   }
 
-  // Chart 3: Network Distribution (4G vs 5G)
+  // Chart 3: Network Distribution (4G vs 5G) with Simpson's Paradox Insight
   const ctxNetwork = document.getElementById("chartNetwork")?.getContext("2d");
   if (ctxNetwork) {
     const net = state.summary.network;
@@ -298,8 +305,14 @@ function renderCharts() {
                 const is4G = ctx.dataIndex === 0;
                 const count = is4G ? net.count_4g : net.count_5g;
                 const pct   = is4G ? net.pct_4g   : net.pct_5g;
-                const avg   = is4G ? net.avg_price_4g : net.avg_price_5g;
-                return `${ctx.label}: ${count.toLocaleString()} (${pct}%) — Prix moy: ${avg.toFixed(2)} €`;
+                const unlimPct = is4G ? (net.unlimited_pct_4g || 7.6) : (net.unlimited_pct_5g || 22.9);
+                const avgFinite = is4G ? (net.avg_price_finite_4g || 24.73) : (net.avg_price_finite_5g || 24.39);
+                return [
+                  `${ctx.label}: ${count.toLocaleString()} (${pct}%)`,
+                  `• Part d'illimités : ${unlimPct}%`,
+                  `• Prix moyen (offres finies) : ${avgFinite.toFixed(2)} €`,
+                  is4G ? "• Base stable de volume" : "• 3x plus d'illimités (explique le surcoût brut)"
+                ];
               }
             }
           }

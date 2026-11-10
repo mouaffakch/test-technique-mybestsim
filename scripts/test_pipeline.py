@@ -79,5 +79,10 @@ class TestESIMPipeline(unittest.TestCase):
         unique_curr = self.raw_df["currency"].unique()
         self.assertEqual(list(unique_curr), ["EUR"])
 
+    def test_na_country_code_and_weighted_price(self):
+        """QA Edge Case: Verify 'NA' country code preserved & volume-weighted price per GB is 1.70 EUR."""
+        self.assertEqual(self.summary["pricing_insights"]["qa_na_country_code_count"], 192)
+        self.assertAlmostEqual(self.summary["kpis"]["price_per_gb_weighted"], 1.70, places=2)
+
 if __name__ == "__main__":
     unittest.main()
