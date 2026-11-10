@@ -47,7 +47,7 @@ function initCruiseSimulator() {
         recDesc = "Couverture universelle sur 130+ pays. Idéal pour les grands voyages, transatlantiques et escales diversifiées hors d'Europe.";
       } else {
         recProvider = "Roamic Europe / Yesim Europe / Airalo Eurolink";
-        recPrice = duration === "7" ? "Dès 5,42 € (Airalo 1 Go) à 10,68 € (Roamic 1 Go)" : "Dès 11,85 € (Airalo 3 Go) à 18,96 € (Roamic 3 Go)";
+        recPrice = duration === "7" ? "Dès 7,53 € (Airalo 1 Go) à 10,68 € (Roamic 1 Go)" : "Dès 14,25 € (Airalo 3 Go) à 18,96 € (Roamic 3 Go)";
         recDesc = "La stratégie favorite des croisiéristes en Méditerranée ! Vous profitez d'une 4G/5G ultra-rapide dès que le bateau approche des côtes et durant toutes vos excursions au port. En mer, mettez votre téléphone en mode avion pour vous déconnecter et préserver votre batterie.";
       }
       
