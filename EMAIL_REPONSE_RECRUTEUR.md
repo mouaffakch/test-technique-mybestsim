@@ -25,7 +25,7 @@ Conformément à vos consignes, les deux livrables ont été déployés de mani�
   *(Article de fond approfondi de 3 445 mots, comparatif haute mer vs escales, 4 visuels réels et infographies vectorielles SVG, simulateur interactif en temps réel, sources officielles UE / GigSky, et balisage Schema.org Article + FAQPage).*
 
 - **Code Source Complet (Repository GitHub) :**  
-  👉 **https://github.com/Chouaibimouaffak/test-technique-mybestsim**  
+  👉 **https://github.com/mouaffakch/test-technique-mybestsim**  
   *(Pipeline Python `scripts/process_data.py`, suite de 8 tests unitaires automatisés validant tous les résultats et workflow GitHub Actions CI/CD).*
 
 ---
@@ -102,5 +102,5 @@ Bien cordialement,
 **Mouaffak Chouaibi**  
 📞 +33 7 53 08 26 51  
 ✉️ mouaffakch21@gmail.com  
-💼 [Profil GitHub : Chouaibimouaffak](https://github.com/Chouaibimouaffak)  
-🔗 [Repository GitHub du projet](https://github.com/Chouaibimouaffak/test-technique-mybestsim)
+💼 [Profil GitHub : mouaffakch](https://github.com/mouaffakch)  
+🔗 [Repository GitHub du projet](https://github.com/mouaffakch/test-technique-mybestsim)
